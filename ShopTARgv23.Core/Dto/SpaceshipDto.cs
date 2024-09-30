@@ -1,4 +1,6 @@
-﻿namespace ShopTARgv23.Core.Dto
+﻿using Microsoft.AspNetCore.Http;
+
+namespace ShopTARgv23.Core.Dto
 {
     public class SpaceshipDto
     {
@@ -9,6 +11,9 @@
         public int CargoWeight { get; set; }
         public int Crew { get; set; }
         public int EnginePower { get; set; }
+        public List<IFormFile> Files { get; set; }
+        public IEnumerable<FileToApiDto> Image { get; set; }
+            = new List<FileToApiDto>();
         public DateTime CreatedAt { get; set; }
         public DateTime ModifiedAt { get; set; }
     }

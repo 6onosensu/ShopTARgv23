@@ -9,9 +9,11 @@ namespace ShopTARgv23.ApplicationServices.Services
     public class SpaceshipsServices : ISpaceshipServices
     {
         private readonly ShopTARgv23Context _context;
-        public SpaceshipsServices(ShopTARgv23Context context)
+        private readonly IFileServices _fileServices;
+        public SpaceshipsServices(ShopTARgv23Context context, IFileServices fileServices)
         {
             _context = context;
+            _fileServices = fileServices;
         }
         public async Task<Spaceship> DetailsAsync(Guid id)
         {
@@ -34,6 +36,7 @@ namespace ShopTARgv23.ApplicationServices.Services
             spaceship.EnginePower = dto.EnginePower;
             spaceship.CreatedAt = DateTime.Now;
             spaceship.ModifiedAt = DateTime.Now;
+            _fileServices.FilesToApi(dto, spaceship);
 
             await _context.Spaceships.AddAsync(spaceship);
             await _context.SaveChangesAsync();
@@ -64,7 +67,7 @@ namespace ShopTARgv23.ApplicationServices.Services
         public async Task<Spaceship> Delete(Guid id)
         {
             var spaceship = await _context.Spaceships
-                .FirstOrDefaultAsync(_ => _.Id == id);
+                .FirstOrDefaultAsync(x => x.Id == id);
 
             _context.Spaceships.Remove(spaceship);
             await _context.SaveChangesAsync();

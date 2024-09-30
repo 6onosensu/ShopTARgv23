@@ -1,4 +1,6 @@
-﻿namespace ShopTARgv23.Models.Spaceships
+﻿using ShopTARgv23.Core.Domain;
+
+namespace ShopTARgv23.Models.Spaceships
 {
     public class SpaceshipCreateUpdateViewModel
     {
@@ -11,5 +13,8 @@
         public int EnginePower { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime ModifiedAt { get; set; }
+        public List<IFormFile> Files { get; set; }
+        public List<FileToApiViewModels> FileToApiViewModels { get; set; }
+            = new List<FileToApiViewModels>();
     }
 }
