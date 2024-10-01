@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ShopTARgv23.Core.Domain;
 using ShopTARgv23.Core.Dto;
 using ShopTARgv23.Core.ServiceInterface;
@@ -79,6 +80,14 @@ namespace ShopTARgv23.Controllers
 
             if (spaceship == null) {return NotFound();}
 
+            var images = await _context.FileToApis
+                .Where(x => x.SpaceshipId == id)
+                .Select(y => new FileToApiViewModels
+                {
+                    FilePath = y.ExistingFilePath,
+                    ImageId = y.Id
+                }).ToArrayAsync();
+
             var vm = new SpaceshipDetailsViewModel();
 
             vm.Id = spaceship.Id;
@@ -90,6 +99,7 @@ namespace ShopTARgv23.Controllers
             vm.EnginePower = spaceship.EnginePower;
             vm.CreatedAt = spaceship.CreatedAt;
             vm.ModifiedAt = spaceship.ModifiedAt;
+            vm.FileToApiViewModels.AddRange(images);
 
             return View(vm);
         }

@@ -9,6 +9,8 @@
         public int CargoWeight { get; set; }
         public int Crew { get; set; }
         public int EnginePower { get; set; }
+        public List<FileToApiViewModels> FileToApiViewModels { get; set; }
+            = new List<FileToApiViewModels>();
         public DateTime CreatedAt { get; set; }
         public DateTime ModifiedAt { get; set; }
     }
