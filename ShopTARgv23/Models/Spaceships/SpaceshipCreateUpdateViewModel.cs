@@ -11,10 +11,10 @@ namespace ShopTARgv23.Models.Spaceships
         public int CargoWeight { get; set; }
         public int Crew { get; set; }
         public int EnginePower { get; set; }
+        public List<IFormFile> Files { get; set; }
+        public List<FileToApiViewModel> FileToApiViewModels { get; set; }
+            = new List<FileToApiViewModel>();
         public DateTime CreatedAt { get; set; }
         public DateTime ModifiedAt { get; set; }
-        public List<IFormFile> Files { get; set; }
-        public List<FileToApiViewModels> FileToApiViewModels { get; set; }
-            = new List<FileToApiViewModels>();
     }
 }

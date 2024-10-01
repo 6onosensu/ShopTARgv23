@@ -5,8 +5,6 @@ using ShopTARgv23.Core.Dto;
 using ShopTARgv23.Core.ServiceInterface;
 using ShopTARgv23.Data;
 using ShopTARgv23.Models.Spaceships;
-using System.Runtime.CompilerServices;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace ShopTARgv23.Controllers
 {
@@ -40,9 +38,10 @@ namespace ShopTARgv23.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
             SpaceshipCreateUpdateViewModel spaceship = new();
+
             return View("CreateUpdate", spaceship);
         }
         public async Task<IActionResult> Create(SpaceshipCreateUpdateViewModel vm)
@@ -84,7 +83,7 @@ namespace ShopTARgv23.Controllers
 
             var images = await _context.FileToApis
                 .Where(x => x.SpaceshipId == id)
-                .Select(y => new FileToApiViewModels
+                .Select(y => new FileToApiViewModel
                 {
                     FilePath = y.ExistingFilePath,
                     ImageId = y.Id
@@ -115,7 +114,7 @@ namespace ShopTARgv23.Controllers
 
             var images = await _context.FileToApis
                 .Where(x => x.SpaceshipId == id)
-                .Select(y => new FileToApiViewModels
+                .Select(y => new FileToApiViewModel
                 {
                     FilePath = y.ExistingFilePath,
                     ImageId = y.Id,
@@ -171,6 +170,14 @@ namespace ShopTARgv23.Controllers
                 return NotFound(); 
             }
 
+            var images = await _context.FileToApis
+                .Where(x => x.SpaceshipId == id)
+                .Select(y => new FileToApiViewModel
+                {
+                    FilePath = y.ExistingFilePath,
+                    ImageId = y.Id,
+                }).ToArrayAsync();
+
             var vm = new SpaceshipDeleteViewModel();
 
             vm.Id = spaceship.Id;
@@ -182,6 +189,7 @@ namespace ShopTARgv23.Controllers
             vm.EnginePower = spaceship.EnginePower;
             vm.CreatedAt = spaceship.CreatedAt;
             vm.ModifiedAt = spaceship.ModifiedAt;
+            vm.FileToApiViewModels.AddRange(images);
 
             return View(vm);
         }
