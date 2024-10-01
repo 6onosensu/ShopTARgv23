@@ -115,7 +115,7 @@ namespace ShopTARgv23.Controllers
 
             var images = await _context.FileToApis
                 .Where(x => x.SpaceshipId == id)
-                .Select(y => new FileToApiViewModels)
+                .Select(y => new FileToApiViewModels
                 {
                     FilePath = y.ExistingFilePath,
                     ImageId = y.Id,
