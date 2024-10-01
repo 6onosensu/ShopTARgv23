@@ -143,17 +143,26 @@ namespace ShopTARgv23.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(SpaceshipCreateUpdateViewModel vm)
         {
-            var dto = new SpaceshipDto();
-
-            dto.Id = vm.Id;
-            dto.Name = vm.Name;
-            dto.Type = vm.Type;
-            dto.BuiltDate = vm.BuiltDate;
-            dto.CargoWeight = vm.CargoWeight;
-            dto.Crew = vm.Crew;
-            dto.EnginePower = vm.EnginePower;
-            dto.CreatedAt = vm.CreatedAt;
-            dto.ModifiedAt = vm.ModifiedAt;
+            var dto = new SpaceshipDto()
+            {
+                Id = vm.Id,
+                Name = vm.Name,
+                Type = vm.Type,
+                BuiltDate = vm.BuiltDate,
+                CargoWeight = vm.CargoWeight,
+                Crew = vm.Crew,
+                EnginePower = vm.EnginePower,
+                ModifiedAt = vm.ModifiedAt,
+                CreatedAt = vm.CreatedAt,
+                Files = vm.Files,
+                Image = vm.FileToApiViewModels
+                    .Select(x => new FileToApiDto
+                    {
+                        Id = x.ImageId,
+                        ExistingFilePath = x.FilePath,
+                        SpaceshipId = x.SpaceshipId,
+                    }).ToArray(),
+            };
 
             var result = await _spaceshipServices.Update(dto);
 
