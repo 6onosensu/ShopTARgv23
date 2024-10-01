@@ -7,3 +7,4 @@
         public Guid? SpaceshipId { get; set; }
     }
 }
+//need Add-Migrations FileToApi

@@ -5,6 +5,8 @@ using ShopTARgv23.Core.Dto;
 using ShopTARgv23.Core.ServiceInterface;
 using ShopTARgv23.Data;
 using ShopTARgv23.Models.Spaceships;
+using System.Runtime.CompilerServices;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace ShopTARgv23.Controllers
 {
@@ -111,6 +113,14 @@ namespace ShopTARgv23.Controllers
 
             if (spaceship == null) { return NotFound(); }
 
+            var images = await _context.FileToApis
+                .Where(x => x.SpaceshipId == id)
+                .Select(y => new FileToApiViewModels)
+                {
+                    FilePath = y.ExistingFilePath,
+                    ImageId = y.Id,
+                }).ToArrayAsync();
+
             var vm = new SpaceshipCreateUpdateViewModel();
 
             vm.Id = spaceship.Id;
@@ -122,6 +132,7 @@ namespace ShopTARgv23.Controllers
             vm.EnginePower = spaceship.EnginePower;
             vm.ModifiedAt = spaceship.ModifiedAt;
             vm.CreatedAt = spaceship.CreatedAt;
+            vm.FileToApiViewModels.AddRange(images);
 
             return View("CreateUpdate", vm);
         }
