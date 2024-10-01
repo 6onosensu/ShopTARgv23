@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ShopTARgv23.ApplicationServices.Services;
 using ShopTARgv23.Core.Domain;
 using ShopTARgv23.Core.Dto;
 using ShopTARgv23.Core.ServiceInterface;
@@ -12,14 +13,17 @@ namespace ShopTARgv23.Controllers
     {
         private readonly ShopTARgv23Context _context;
         private readonly ISpaceshipServices _spaceshipServices;
+        private readonly IFileServices _fileServices;
         public SpaceshipsController
             (
                 ShopTARgv23Context context,
-                ISpaceshipServices spaceshipServices
+                ISpaceshipServices spaceshipServices,
+                IFileServices fileSevices
             )
         {
             _context = context;
             _spaceshipServices = spaceshipServices;
+            _fileServices = fileSevices;
         }
 
         public IActionResult Index()
@@ -203,6 +207,24 @@ namespace ShopTARgv23.Controllers
             {
                 return RedirectToAction(nameof(Index));
             }
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RemoveImage(FileToApiViewModel vm)
+        {
+            var dto = new FileToApiDto()
+            {
+                Id = vm.ImageId,
+            };
+
+            var image = await _fileServices.RemoveImageFromApi(dto);
+
+            if (image == null)
+            { 
+                return RedirectToAction(nameof(Index));
+            }
+
             return RedirectToAction(nameof(Index));
         }
     }
