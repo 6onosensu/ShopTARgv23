@@ -1,6 +1,4 @@
-﻿using ShopTARgv23.Core.Domain;
-
-namespace ShopTARgv23.Models.Spaceships
+﻿namespace ShopTARgv23.Models.Spaceships
 {
     public class SpaceshipCreateUpdateViewModel
     {

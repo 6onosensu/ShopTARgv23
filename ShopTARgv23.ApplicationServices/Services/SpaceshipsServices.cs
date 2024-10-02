@@ -10,11 +10,12 @@ namespace ShopTARgv23.ApplicationServices.Services
     {
         private readonly ShopTARgv23Context _context;
         private readonly IFileServices _fileServices;
-        public SpaceshipsServices(ShopTARgv23Context context, IFileServices fileServices)
+        public SpaceshipsServices( ShopTARgv23Context context, IFileServices fileServices )
         {
             _context = context;
             _fileServices = fileServices;
         }
+
         public async Task<Spaceship> DetailsAsync(Guid id)
         {
             var result = await _context.Spaceships

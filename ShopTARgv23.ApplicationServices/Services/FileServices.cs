@@ -83,9 +83,9 @@ namespace ShopTARgv23.ApplicationServices.Services
 
                 _context.FileToApis.Remove(imageId);
                 await _context.SaveChangesAsync();
-
-                return null;
             }
+
+            return null;
         }
     }
 }
