@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Models\Kindergarten\" />
     <Folder Include="multipleFileUpload\" />
   </ItemGroup>
 
