@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using ShopTARgv23.Core.ServiceInterface;
 using ShopTARgv23.ApplicationServices.Services;
 using Microsoft.Extensions.FileProviders;
+using ShopTARgv23.Core.Domain;
 
 namespace ShopTARgv23
 {
@@ -17,6 +18,7 @@ namespace ShopTARgv23
 
             builder.Services.AddScoped<ISpaceshipServices, SpaceshipsServices>();
             builder.Services.AddScoped<IFileServices, FileServices>();
+            builder.Services.AddScoped<IKindergarten, KindergartenServices>();
 
             builder.Services.AddDbContext<ShopTARgv23Context>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
