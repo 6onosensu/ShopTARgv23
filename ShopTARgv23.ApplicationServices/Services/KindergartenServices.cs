@@ -14,7 +14,7 @@ namespace ShopTARgv23.ApplicationServices.Services
             _context = context;
         }
 
-        public async Task<Kindergarten> DetailsAsync(Guid id)
+        public async Task<Kindergarten> Details(Guid id)
         {
             var result = await _context.Kindergarten.FirstOrDefaultAsync(x => x.Id == id);
             return result;
@@ -24,6 +24,16 @@ namespace ShopTARgv23.ApplicationServices.Services
         {
             Kindergarten kindergarten = new();
 
+            kindergarten.Id = Guid.NewGuid();
+            kindergarten.GroupName = dto.GroupName;
+            kindergarten.ChildrenCount = dto.ChildrenCount;
+            kindergarten.KindergartenName = dto.KindergartenName;
+            kindergarten.Teacher = dto.Teacher;
+            kindergarten.CreatedAt = DateTime.Now;
+            kindergarten.UpdatedAt = DateTime.Now;
+
+            await _context.Kindergarten.AddAsync(kindergarten);
+            await _context.SaveChangesAsync();
 
             return kindergarten;
         }
@@ -32,6 +42,16 @@ namespace ShopTARgv23.ApplicationServices.Services
         {
             Kindergarten domain = new();
 
+            domain.Id = dto.Id;
+            domain.GroupName = dto.GroupName;
+            domain.ChildrenCount = dto.ChildrenCount;
+            domain.KindergartenName = dto.KindergartenName;
+            domain.Teacher = dto.Teacher;
+            domain.CreatedAt = dto.CreatedAt;
+            domain.UpdatedAt = DateTime.Now;
+
+            _context.Kindergarten.Update(domain);
+            await _context.SaveChangesAsync();
 
             return domain;
         }
@@ -39,8 +59,8 @@ namespace ShopTARgv23.ApplicationServices.Services
         public async Task<Kindergarten> Delete(Guid id)
         {
             var kindergarten = await _context.Kindergarten.FirstOrDefaultAsync(x => x.Id == id);
-
-
+            _context.Kindergarten.Remove(kindergarten);
+            await _context.SaveChangesAsync();
             return kindergarten;
         }
     }
