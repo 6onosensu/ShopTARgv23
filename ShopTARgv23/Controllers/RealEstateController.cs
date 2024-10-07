@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ShopTARgv23.ApplicationServices.Services;
 using ShopTARgv23.Core.Dto;
 using ShopTARgv23.Core.ServiceInterface;
 using ShopTARgv23.Data;
 using ShopTARgv23.Models.RealEstate;
+using ShopTARgv23.Models.Spaceships;
 
 namespace ShopTARgv23.Controllers
 {
@@ -118,5 +120,38 @@ namespace ShopTARgv23.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var estate = await _realEstate.Details(id);
+
+            if (estate == null)
+            {
+                return NotFound();
+            }
+            var vm = new RealEstateDeleteViewModel();
+
+            vm.Id = estate.Id;
+            vm.Location = estate.Location;
+            vm.Size = estate.Size;
+            vm.RoomNumber = estate.RoomNumber;
+            vm.BuildingType = estate.BuildingType;
+            vm.CreatedAt = estate.CreatedAt;
+            vm.ModifiedAt = estate.ModifiedAt;
+
+            return View(vm);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteConfirmation(Guid id)
+        {
+            var estate = await _realEstate.Delete(id);
+
+            if (estate == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
