@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using ShopTARgv23.ApplicationServices.Services;
 using ShopTARgv23.Core.Dto;
 using ShopTARgv23.Core.ServiceInterface;
 using ShopTARgv23.Data;
 using ShopTARgv23.Models.RealEstate;
-using ShopTARgv23.Models.Spaceships;
 
 namespace ShopTARgv23.Controllers
 {
