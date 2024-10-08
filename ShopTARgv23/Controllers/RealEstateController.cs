@@ -49,6 +49,17 @@ namespace ShopTARgv23.Controllers
                 Size = vm.Size,
                 RoomNumber = vm.RoomNumber,
                 BuildingType = vm.BuildingType,
+                CreatedAt = DateTime.Now,
+                ModifiedAt = DateTime.Now,
+                Files = vm.Files,
+                Image = vm.Image
+                    .Select(x => new FileToDatabaseDto
+                    {
+                        Id = x.ImageId,
+                        ImageData = x.ImageData,
+                        ImageTitle = x.ImageTitle,
+                        RealEstateId = x.RealEstateId,
+                    }).ToArray()
             };
 
             var result = await _realEstate.Create(dto);
@@ -105,7 +116,7 @@ namespace ShopTARgv23.Controllers
                 Size = vm.Size,
                 RoomNumber = vm.RoomNumber,
                 BuildingType = vm.BuildingType,
-                ModifiedAt = vm.ModifiedAt,
+                ModifiedAt = DateTime.Now,
                 CreatedAt = vm.CreatedAt
             };
 
