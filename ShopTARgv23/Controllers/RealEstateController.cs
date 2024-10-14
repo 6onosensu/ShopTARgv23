@@ -12,10 +12,12 @@ namespace ShopTARgv23.Controllers
     {
         private readonly ShopTARgv23Context _context;
         private readonly IRealEstate _realEstate;
-        public RealEstateController(ShopTARgv23Context context, IRealEstate realEstate)
+        private readonly IFileServices _fileServices;
+        public RealEstateController(ShopTARgv23Context context, IRealEstate realEstate, IFileServices fileServices)
         {
             _context = context;
             _realEstate = realEstate;
+            _fileServices = fileServices;
         }
         public IActionResult Index()
         {
@@ -172,6 +174,17 @@ namespace ShopTARgv23.Controllers
             {
                 return NotFound();
             }
+
+            var images = await _context.FileToDatabases
+              .Where(x => x.RealEstateId == id)
+              .Select(y => new RealEstateImageViewModel
+              {
+                  ImageId = y.Id,
+                  RealEstateId = y.Id,
+                  ImageData = y.ImageData,
+                  ImageTitle = y.ImageTitle,
+              }).ToArrayAsync();
+
             var vm = new RealEstateDeleteViewModel();
 
             vm.Id = estate.Id;
@@ -181,6 +194,7 @@ namespace ShopTARgv23.Controllers
             vm.BuildingType = estate.BuildingType;
             vm.CreatedAt = estate.CreatedAt;
             vm.ModifiedAt = estate.ModifiedAt;
+            vm.Image.AddRange(images);
 
             return View(vm);
         }
@@ -191,6 +205,23 @@ namespace ShopTARgv23.Controllers
             var estate = await _realEstate.Delete(id);
 
             if (estate == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RemoveImage(RealEstateImageViewModel file)
+        {
+            var dto = new FileToDatabaseDto()
+            {
+                Id = file.ImageId,
+            };
+
+            var image = await _fileServices.RemoveImageFromDatabase(dto);
+
+            if(image == null)
             {
                 return RedirectToAction(nameof(Index));
             }
