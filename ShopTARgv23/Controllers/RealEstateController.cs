@@ -4,6 +4,7 @@ using ShopTARgv23.Core.Dto;
 using ShopTARgv23.Core.ServiceInterface;
 using ShopTARgv23.Data;
 using ShopTARgv23.Models.RealEstate;
+using ShopTARgv23.Models.Spaceships;
 
 namespace ShopTARgv23.Controllers
 {
@@ -76,6 +77,18 @@ namespace ShopTARgv23.Controllers
         {
             var estate = await _realEstate.Details(id);
             if (estate == null) { return NotFound(); }
+
+            var images = await _context.FileToDatabases
+               .Where(x => x.RealEstateId == id)
+               .Select(y => new RealEstateImageViewModel
+               {
+                   ImageId = y.Id,
+                   RealEstateId = y.Id,
+                   ImageData = y.ImageData,
+                   ImageTitle = y.ImageTitle,
+                   Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(y.ImageData)),
+               }).ToArrayAsync();
+
             var vm = new RealEstateDetailsViewModel();
 
             vm.Id = estate.Id;
@@ -83,6 +96,7 @@ namespace ShopTARgv23.Controllers
             vm.Size = estate.Size;
             vm.RoomNumber = estate.RoomNumber;
             vm.BuildingType = estate.BuildingType;
+            vm.Image.AddRange(images);
 
             return View(vm);
         }
@@ -93,6 +107,17 @@ namespace ShopTARgv23.Controllers
             var estate = await _realEstate.Details(id);
             if (estate == null) { return NotFound(); }
 
+            var images = await _context.FileToDatabases
+               .Where(x => x.RealEstateId == id)
+               .Select(y => new RealEstateImageViewModel
+               {
+                   ImageId = y.Id,
+                   RealEstateId = y.Id,
+                   ImageData = y.ImageData,
+                   ImageTitle = y.ImageTitle,
+                   Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(y.ImageData)),
+               }).ToArrayAsync();
+
             var vm = new RealEstateCreateUpdateViewModel();
 
             vm.Id = estate.Id;
@@ -100,8 +125,9 @@ namespace ShopTARgv23.Controllers
             vm.Size = estate.Size;
             vm.RoomNumber = estate.RoomNumber;
             vm.BuildingType = estate.BuildingType;
-            vm.ModifiedAt = estate.ModifiedAt;
+            vm.ModifiedAt = DateTime.Now;
             vm.CreatedAt = estate.CreatedAt;
+            vm.Image.AddRange(images);
 
             return View("CreateUpdate", vm);
         }
@@ -117,7 +143,15 @@ namespace ShopTARgv23.Controllers
                 RoomNumber = vm.RoomNumber,
                 BuildingType = vm.BuildingType,
                 ModifiedAt = DateTime.Now,
-                CreatedAt = vm.CreatedAt
+                CreatedAt = vm.CreatedAt,
+                Files = vm.Files,
+                Image = vm.Image.Select(x => new FileToDatabaseDto
+                {
+                    Id = x.ImageId,
+                    ImageData = x.ImageData,
+                    ImageTitle = x.ImageTitle,
+                    RealEstateId = x.RealEstateId,
+                }).ToArray(),
             };
 
             var result = await _realEstate.Update(dto);

@@ -64,7 +64,7 @@ namespace ShopTARgv23.ApplicationServices.Services
 
         public async Task<RealEstate> Update(RealEstateDto dto)
         {
-            RealEstate domain = new RealEstate();
+            var domain = new RealEstate();
 
             domain.Id = dto.Id;
             domain.Location = dto.Location;
@@ -73,6 +73,11 @@ namespace ShopTARgv23.ApplicationServices.Services
             domain.BuildingType = dto.BuildingType;
             domain.CreatedAt = dto.CreatedAt;
             domain.ModifiedAt = DateTime.Now;
+
+            if (dto.Files != null) 
+            {
+                _fileServices.UploadFilesToDatabase(dto, domain);
+            }
 
             _context.RealEstates.Update(domain);
             await _context.SaveChangesAsync();
