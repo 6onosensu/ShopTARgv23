@@ -4,7 +4,6 @@ using ShopTARgv23.Core.Domain;
 using ShopTARgv23.Core.Dto;
 using ShopTARgv23.Core.ServiceInterface;
 using ShopTARgv23.Data;
-using static System.Net.Mime.MediaTypeNames;
 
 
 namespace ShopTARgv23.ApplicationServices.Services
