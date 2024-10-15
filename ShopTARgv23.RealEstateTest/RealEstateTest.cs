@@ -34,7 +34,7 @@ namespace ShopTARgv23.RealEstateTest
             Guid guid = Guid.Parse("9fdcacaa-8842-478a-ad87-472766b485c8");
 
             //Act
-            await Svc<IRealEstate>().GetAsync(guid);
+            await Svc<IRealEstate>().Details(guid);
 
             //Assert
             Assert.NotEqual(wrongGuid, guid);
@@ -49,7 +49,7 @@ namespace ShopTARgv23.RealEstateTest
             Guid guid = Guid.Parse("9fdcacaa-8842-478a-ad87-472766b485c8");
 
             //Act
-            await Svc<IRealEstate>().GetAsync(guid);
+            await Svc<IRealEstate>().Details(guid);
 
             //Assert
             Assert.Equal(theGuid, guid);
