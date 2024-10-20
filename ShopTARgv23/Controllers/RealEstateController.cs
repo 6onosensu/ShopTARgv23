@@ -4,7 +4,6 @@ using ShopTARgv23.Core.Dto;
 using ShopTARgv23.Core.ServiceInterface;
 using ShopTARgv23.Data;
 using ShopTARgv23.Models.RealEstate;
-using ShopTARgv23.Models.Spaceships;
 
 namespace ShopTARgv23.Controllers
 {
@@ -52,8 +51,8 @@ namespace ShopTARgv23.Controllers
                 Size = vm.Size,
                 RoomNumber = vm.RoomNumber,
                 BuildingType = vm.BuildingType,
-                CreatedAt = DateTime.Now,
-                ModifiedAt = DateTime.Now,
+                CreatedAt = vm.CreatedAt,
+                ModifiedAt = vm.ModifiedAt,
                 Files = vm.Files,
                 Image = vm.Image
                     .Select(x => new FileToDatabaseDto
@@ -98,6 +97,8 @@ namespace ShopTARgv23.Controllers
             vm.Size = estate.Size;
             vm.RoomNumber = estate.RoomNumber;
             vm.BuildingType = estate.BuildingType;
+            vm.CreatedAt = estate.CreatedAt;
+            vm.ModifiedAt = estate.ModifiedAt;
             vm.Image.AddRange(images);
 
             return View(vm);
@@ -127,8 +128,8 @@ namespace ShopTARgv23.Controllers
             vm.Size = estate.Size;
             vm.RoomNumber = estate.RoomNumber;
             vm.BuildingType = estate.BuildingType;
-            vm.ModifiedAt = DateTime.Now;
             vm.CreatedAt = estate.CreatedAt;
+            vm.ModifiedAt = estate.ModifiedAt;
             vm.Image.AddRange(images);
 
             return View("CreateUpdate", vm);
@@ -183,11 +184,12 @@ namespace ShopTARgv23.Controllers
                   RealEstateId = y.Id,
                   ImageData = y.ImageData,
                   ImageTitle = y.ImageTitle,
+                  Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(y.ImageData))
               }).ToArrayAsync();
 
             var vm = new RealEstateDeleteViewModel();
 
-            vm.Id = estate.Id;
+            vm.Id = id;
             vm.Location = estate.Location;
             vm.Size = estate.Size;
             vm.RoomNumber = estate.RoomNumber;
