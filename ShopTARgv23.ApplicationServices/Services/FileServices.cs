@@ -124,7 +124,7 @@ namespace ShopTARgv23.ApplicationServices.Services
             return image;
         }
 
-        public async Task<List<FileToDatabase>> RemoveImagesFromDatabase(FileToDatabaseDto[] dtos)
+        public async Task<FileToDatabase> RemoveImagesFromDatabase(FileToDatabaseDto[] dtos)
         {
             foreach (var dto in dtos)
             {

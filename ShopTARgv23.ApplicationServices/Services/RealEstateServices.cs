@@ -34,9 +34,8 @@ namespace ShopTARgv23.ApplicationServices.Services
                 .Select(y => new FileToDatabaseDto
                 {
                     Id = y.Id,
-                    RealEstateId = y.RealEstateId,
-                    ImageData = y.ImageData,
                     ImageTitle = y.ImageTitle,
+                    RealEstateId = y.RealEstateId
                 }).ToArrayAsync();
 
             await _fileServices.RemoveImagesFromDatabase(images);
@@ -71,15 +70,16 @@ namespace ShopTARgv23.ApplicationServices.Services
 
         public async Task<RealEstate> Update(RealEstateDto dto)
         {
-            var domain = new RealEstate();
-
-            domain.Id = dto.Id;
-            domain.Location = dto.Location;
-            domain.Size = dto.Size;
-            domain.RoomNumber = dto.RoomNumber;
-            domain.BuildingType = dto.BuildingType;
-            domain.CreatedAt = dto.CreatedAt;
-            domain.ModifiedAt = DateTime.Now;
+            var domain = new RealEstate()
+            {
+                Id = dto.Id,
+                Location = dto.Location,
+                Size = dto.Size,
+                RoomNumber = dto.RoomNumber,
+                BuildingType = dto.BuildingType,
+                CreatedAt = dto.CreatedAt,
+                ModifiedAt = DateTime.Now,
+            };
 
             if (dto.Files != null) 
             {
