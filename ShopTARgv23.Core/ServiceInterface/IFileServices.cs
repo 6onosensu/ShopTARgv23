@@ -1,6 +1,5 @@
 ﻿using ShopTARgv23.Core.Domain;
 using ShopTARgv23.Core.Dto;
-using System.Xml;
 
 namespace ShopTARgv23.Core.ServiceInterface
 {

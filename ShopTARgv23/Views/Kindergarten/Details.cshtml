@@ -34,6 +34,12 @@
             <label asp-for="UpdatedAt" class="col-sm-2 col-form-label"></label>
             @Html.DisplayFor(model => model.UpdatedAt)
         </div>
+
+        @foreach (var images in Model.Image)
+        {
+            <partial name="_Images" model="images" />
+        }
+
     </dl>
     <a asp-action="Index" asp-controller="kindergarten" class="btn btn-outline-primary">Back</a>
 </div>
