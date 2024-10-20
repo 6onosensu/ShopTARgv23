@@ -5,6 +5,7 @@ using ShopTARgv23.Data;
 using ShopTARgv23.Models.Kindergarten;
 using Microsoft.EntityFrameworkCore;
 using ShopTARgv23.ApplicationServices.Services;
+using System.Xml;
 
 namespace ShopTARgv23.Controllers
 {
@@ -160,6 +161,7 @@ namespace ShopTARgv23.Controllers
 
             var vm = new KindergartenDetailsViewModel();
 
+            vm.Id = id;
             vm.Id = kindergarten.Id;
             vm.GroupName = kindergarten.GroupName;
             vm.ChildrenCount = kindergarten.ChildrenCount;
@@ -192,6 +194,7 @@ namespace ShopTARgv23.Controllers
             var vm = new KindergartenDeleteViewModel();
 
             vm.Id = id;
+            vm.Id = kindergarten.Id;
             vm.GroupName = kindergarten.GroupName;
             vm.ChildrenCount = kindergarten.ChildrenCount;
             vm.KindergartenName = kindergarten.KindergartenName;

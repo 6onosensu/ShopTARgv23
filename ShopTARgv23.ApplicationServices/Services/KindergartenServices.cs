@@ -3,7 +3,6 @@ using ShopTARgv23.Core.Domain;
 using ShopTARgv23.Core.Dto;
 using ShopTARgv23.Core.ServiceInterface;
 using ShopTARgv23.Data;
-using System.Xml;
 
 namespace ShopTARgv23.ApplicationServices.Services
 {
@@ -25,7 +24,7 @@ namespace ShopTARgv23.ApplicationServices.Services
 
         public async Task<Kindergarten> Create(KindergartenDto dto)
         {
-            Kindergarten kindergarten = new();
+            Kindergarten kindergarten = new Kindergarten();
 
             kindergarten.Id = Guid.NewGuid();
             kindergarten.GroupName = dto.GroupName;

@@ -1,4 +1,5 @@
-﻿namespace ShopTARgv23.Core.Domain
+﻿
+namespace ShopTARgv23.Core.Domain
 {
     public class Kindergarten
     {
