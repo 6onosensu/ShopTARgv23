@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 using ShopTARgv23.Core.ServiceInterface;
 using ShopTARgv23.ApplicationServices.Services;
 using Microsoft.Extensions.FileProviders;
-using ShopTARgv23.Core.Domain;
 
 namespace ShopTARgv23
 {

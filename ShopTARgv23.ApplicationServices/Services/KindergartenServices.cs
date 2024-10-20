@@ -3,15 +3,18 @@ using ShopTARgv23.Core.Domain;
 using ShopTARgv23.Core.Dto;
 using ShopTARgv23.Core.ServiceInterface;
 using ShopTARgv23.Data;
+using System.Xml;
 
 namespace ShopTARgv23.ApplicationServices.Services
 {
     public class KindergartenServices : IKindergarten
     {
         private readonly ShopTARgv23Context _context;
-        public KindergartenServices(ShopTARgv23Context context) 
+        private readonly IFileServices _fileServices;
+        public KindergartenServices(ShopTARgv23Context context, IFileServices fileServices) 
         { 
             _context = context;
+            _fileServices = fileServices;
         }
 
         public async Task<Kindergarten> Details(Guid id)
@@ -32,6 +35,11 @@ namespace ShopTARgv23.ApplicationServices.Services
             kindergarten.CreatedAt = DateTime.Now;
             kindergarten.UpdatedAt = DateTime.Now;
 
+            if (dto.Files != null)
+            {
+                _fileServices.UploadFilesToDatabase(dto, kindergarten);
+            }
+
             await _context.Kindergarten.AddAsync(kindergarten);
             await _context.SaveChangesAsync();
 
@@ -40,15 +48,21 @@ namespace ShopTARgv23.ApplicationServices.Services
 
         public async Task<Kindergarten> Update(KindergartenDto dto)
         {
-            Kindergarten domain = new();
+            var domain = new Kindergarten()
+            {
+                Id = dto.Id,
+                GroupName = dto.GroupName,
+                ChildrenCount = dto.ChildrenCount,
+                KindergartenName = dto.KindergartenName,
+                Teacher = dto.Teacher,
+                CreatedAt = dto.CreatedAt,
+                UpdatedAt = DateTime.Now,
+            };
 
-            domain.Id = dto.Id;
-            domain.GroupName = dto.GroupName;
-            domain.ChildrenCount = dto.ChildrenCount;
-            domain.KindergartenName = dto.KindergartenName;
-            domain.Teacher = dto.Teacher;
-            domain.CreatedAt = dto.CreatedAt;
-            domain.UpdatedAt = DateTime.Now;
+            if (dto.Files != null)
+            {
+                _fileServices.UploadFilesToDatabase(dto, domain);
+            }
 
             _context.Kindergarten.Update(domain);
             await _context.SaveChangesAsync();
@@ -58,10 +72,22 @@ namespace ShopTARgv23.ApplicationServices.Services
 
         public async Task<Kindergarten> Delete(Guid id)
         {
-            var kindergarten = await _context.Kindergarten.FirstOrDefaultAsync(x => x.Id == id);
-            _context.Kindergarten.Remove(kindergarten);
+            var result = await _context.Kindergarten
+               .FirstOrDefaultAsync(x => x.Id == id);
+
+            var images = await _context.FileToDatabases
+                .Where(x => x.KindergartenId == id)
+                .Select(y => new FileToDatabaseDto
+                {
+                    Id = y.Id,
+                    ImageTitle = y.ImageTitle,
+                    KindergartenId = y.KindergartenId
+                }).ToArrayAsync();
+
+            await _fileServices.RemoveImagesFromDatabase(images);
+            _context.Kindergarten.Remove(result);
             await _context.SaveChangesAsync();
-            return kindergarten;
+            return result;
         }
     }
 }

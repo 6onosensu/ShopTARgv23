@@ -66,7 +66,6 @@ namespace ShopTARgv23.ApplicationServices.Services
 
             return null;
         }
-
         public async Task<List<FileToApi>> RemoveImagesFromApi(FileToApiDto[] dtos)
         {
             foreach (var dto in dtos)
@@ -89,7 +88,6 @@ namespace ShopTARgv23.ApplicationServices.Services
             return null;
         }
 
-        /*
         public void UploadFilesToDatabase(KindergartenDto dto, Kindergarten domain)
         {
             if (dto.Files != null && dto.Files.Count > 0)
@@ -102,7 +100,7 @@ namespace ShopTARgv23.ApplicationServices.Services
                         {
                             Id = Guid.NewGuid(),
                             ImageTitle = image.FileName,
-                            RealEstateId = domain.Id,
+                            KindergartenId = domain.Id,
                         };
 
                         image.CopyTo(target);
@@ -137,7 +135,7 @@ namespace ShopTARgv23.ApplicationServices.Services
             }
 
             return null;
-        }*/
+        }
     }
 }
 
