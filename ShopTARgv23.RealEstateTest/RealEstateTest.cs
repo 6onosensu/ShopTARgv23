@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using ShopTARgv23.Core.Dto;
 using ShopTARgv23.Core.ServiceInterface;
 using System;
@@ -40,7 +41,7 @@ namespace ShopTARgv23.RealEstateTest
             Assert.NotEqual(wrongGuid, guid);
 
         }
-    
+
         [Fact]
         public async Task Should_GetByIdRealEstate_WhenReturnsEqual()
         {
@@ -53,6 +54,43 @@ namespace ShopTARgv23.RealEstateTest
 
             //Assert
             Assert.Equal(correctGuid, guid);
+        }
+
+        [Fact]
+        public async Task Should_DeleteByIdRealEstate_WhenDeleteRealestate()
+        {
+            RealEstateDto realEstate = MockRealEstateData();
+
+            var created = await Svc<IRealEstate>().Create(realEstate);
+            var result = await Svc<IRealEstate>().Delete((Guid)created.Id);
+
+            Assert.Equal(result, created);
+        }
+
+        [Fact]
+        public async Task ShouldNot_DeleteByIdRealEstate_WhenDidNotDeleteRealestate()
+        {
+            RealEstateDto realEstate = MockRealEstateData();
+
+            var created = await Svc<IRealEstate>().Create(realEstate);
+            var result = await Svc<IRealEstate>().Delete((Guid)created.Id);
+
+            Assert.NotEqual(result, created);
+        }
+
+        private RealEstateDto MockRealEstateData()
+        {
+            RealEstateDto realEstate = new()
+            {
+                Location = "asd",
+                Size = 100,
+                RoomNumber = 1,
+                BuildingType = "asd",
+                CreatedAt = DateTime.Now,
+                ModifiedAt = DateTime.Now,
+            };
+            
+            return realEstate;
         }
     }
 }

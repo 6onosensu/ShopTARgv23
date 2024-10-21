@@ -1,10 +1,11 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using ShopTARgv23.Core.ServiceInterface;
 using ShopTARgv23.ApplicationServices.Services;
+using ShopTARgv23.Core.ServiceInterface;
 using ShopTARgv23.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using ShopTARgv23.RealEstateTest.Macros;
+using Microsoft.Extensions.Hosting;
 using ShopTARgv23.RealEstateTest.Mock;
 
 namespace ShopTARgv23.RealEstateTest
