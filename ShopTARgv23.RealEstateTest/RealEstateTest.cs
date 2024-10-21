@@ -1,7 +1,5 @@
-using Microsoft.EntityFrameworkCore;
 using ShopTARgv23.Core.Dto;
 using ShopTARgv23.Core.ServiceInterface;
-using System;
 
 namespace ShopTARgv23.RealEstateTest
 {
@@ -72,10 +70,12 @@ namespace ShopTARgv23.RealEstateTest
         {
             RealEstateDto realEstate = MockRealEstateData();
 
-            var created = await Svc<IRealEstate>().Create(realEstate);
-            var result = await Svc<IRealEstate>().Delete((Guid)created.Id);
+            var created1 = await Svc<IRealEstate>().Create(realEstate);
+            var created2 = await Svc<IRealEstate>().Create(realEstate);
 
-            Assert.NotEqual(result, created);
+            var result = await Svc<IRealEstate>().Delete((Guid)created2.Id);
+
+            Assert.NotEqual(created1.Id, result.Id);
         }
 
         private RealEstateDto MockRealEstateData()

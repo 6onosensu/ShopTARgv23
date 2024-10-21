@@ -30,7 +30,6 @@ namespace ShopTARgv23.RealEstateTest
 
         }
 
-
         protected T Macro<T>() where T : IMacros
         {
             return serviceProvider.GetService<T>();
