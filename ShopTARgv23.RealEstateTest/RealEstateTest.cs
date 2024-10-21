@@ -119,6 +119,9 @@ namespace ShopTARgv23.RealEstateTest
             Assert.Equal(created1.Location, result.Location);
             Assert.Equal(created1.RoomNumber, result.RoomNumber);
             Assert.True(created1.Size == result.Size);
+
+            Assert.DoesNotMatch(result.Location, created1.Location);
+            Assert.NotEqual(result.ModifiedAt, created1.ModifiedAt);
         }
         private RealEstateDto MockRealEstateData2()
         {
