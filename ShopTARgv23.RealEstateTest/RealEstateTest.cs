@@ -1,3 +1,5 @@
+using Azure.Identity;
+using ShopTARgv23.Core.Domain;
 using ShopTARgv23.Core.Dto;
 using ShopTARgv23.Core.ServiceInterface;
 
@@ -78,13 +80,65 @@ namespace ShopTARgv23.RealEstateTest
             Assert.NotEqual(created1.Id, result.Id);
         }
 
+        [Fact]
+        public async Task Should_UpdateRealEstate_WhenUpdateData()
+        {
+            var guid = Guid.Parse("9fdcacaa-8842-478a-ad87-472766b485c8");
+
+            //new data
+            RealEstateDto dto = MockRealEstateData();
+
+            //from db data
+            RealEstate domain = new();
+
+            domain.Id = Guid.Parse("9fdcacaa-8842-413a-ad87-472766b485c8");
+            domain.Location = "qwerty";
+            domain.Size = 123;
+            domain.RoomNumber = 3;
+            domain.BuildingType = "qwerty";
+            domain.CreatedAt = DateTime.UtcNow;
+            domain.ModifiedAt = DateTime.UtcNow;
+
+            var result = await Svc<IRealEstate>().Update(dto);
+
+            Assert.Equal(domain.Id, guid);
+            Assert.DoesNotMatch(domain.Location, dto.Location);
+            Assert.DoesNotMatch(domain.RoomNumber.ToString(), dto.RoomNumber.ToString());
+            Assert.NotEqual(domain.Size, dto.Size);
+            //Assert.True(domain == result);
+        }
+
+        [Fact]
+        public async Task Should_UpdateRealEstate_WhenUpdateDataVersion2()
+        {
+            RealEstateDto dto = MockRealEstateData();
+            RealEstateDto dto2 = MockRealEstateData2();
+
+            Assert.Equal(dto.Location, dto2.Location);
+            Assert.Equal(dto.RoomNumber, dto2.RoomNumber);
+            Assert.True(dto.Size == dto.Size);
+        }
+        private RealEstateDto MockRealEstateData2()
+        {
+            RealEstateDto realEstate = new()
+            {
+                Location = "asd",
+                Size = 100,
+                RoomNumber = 2,
+                BuildingType = "asd",
+                CreatedAt = DateTime.Now,
+                ModifiedAt = DateTime.Now,
+            };
+
+            return realEstate;
+        }
         private RealEstateDto MockRealEstateData()
         {
             RealEstateDto realEstate = new()
             {
                 Location = "asd",
                 Size = 100,
-                RoomNumber = 1,
+                RoomNumber = 2,
                 BuildingType = "asd",
                 CreatedAt = DateTime.Now,
                 ModifiedAt = DateTime.Now,
