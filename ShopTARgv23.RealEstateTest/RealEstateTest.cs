@@ -83,7 +83,7 @@ namespace ShopTARgv23.RealEstateTest
         [Fact]
         public async Task Should_UpdateRealEstate_WhenUpdateData()
         {
-            var guid = Guid.Parse("9fdcacaa-8842-478a-ad87-472766b485c8");
+            var guid = Guid.Parse("9fdcacaa-8842-413a-ad87-472766b485c8");
 
             //new data
             RealEstateDto dto = MockRealEstateData();
@@ -105,18 +105,20 @@ namespace ShopTARgv23.RealEstateTest
             Assert.DoesNotMatch(domain.Location, dto.Location);
             Assert.DoesNotMatch(domain.RoomNumber.ToString(), dto.RoomNumber.ToString());
             Assert.NotEqual(domain.Size, dto.Size);
-            //Assert.True(domain == result);
         }
 
         [Fact]
         public async Task Should_UpdateRealEstate_WhenUpdateDataVersion2()
         {
             RealEstateDto dto = MockRealEstateData();
-            RealEstateDto dto2 = MockRealEstateData2();
+            RealEstateDto update = MockRealEstateData2();
 
-            Assert.Equal(dto.Location, dto2.Location);
-            Assert.Equal(dto.RoomNumber, dto2.RoomNumber);
-            Assert.True(dto.Size == dto.Size);
+            var created1 = await Svc<IRealEstate>().Create(dto);
+            var result = await Svc<IRealEstate>().Update(update);
+
+            Assert.Equal(created1.Location, result.Location);
+            Assert.Equal(created1.RoomNumber, result.RoomNumber);
+            Assert.True(created1.Size == result.Size);
         }
         private RealEstateDto MockRealEstateData2()
         {
