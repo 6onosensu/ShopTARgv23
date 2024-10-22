@@ -137,6 +137,16 @@ namespace ShopTARgv23.RealEstateTest
             Assert.True(dto.Id == nullId);
         }
 
+        [Fact]
+        public async Task Should_ReturnNull_WhenRealEstateDoesNotExist()
+        {
+            Guid nonExistingId = Guid.NewGuid();
+
+            var result = await Svc<IRealEstate>().Details(nonExistingId);
+
+            Assert.Null(result);
+        }
+
         private RealEstateDto MockRealEstateData2()
         {
             RealEstateDto realEstate = new()
