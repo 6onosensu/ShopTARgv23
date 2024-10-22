@@ -1,4 +1,3 @@
-using Azure.Identity;
 using ShopTARgv23.Core.Domain;
 using ShopTARgv23.Core.Dto;
 using ShopTARgv23.Core.ServiceInterface;
@@ -123,6 +122,21 @@ namespace ShopTARgv23.RealEstateTest
             Assert.DoesNotMatch(result.Location, created1.Location);
             Assert.NotEqual(result.ModifiedAt, created1.ModifiedAt);
         }
+
+        [Fact]
+        public async Task ShouldNot_UpdateRealEstate_WhenNotUpdateData()
+        {
+            RealEstateDto dto = MockRealEstateData();
+            var created = await Svc<IRealEstate>().Create(dto);
+
+            RealEstateDto nullUpdate = MockNullRealEstateData();
+            var result = await Svc<IRealEstate>().Update(nullUpdate);
+
+            var nullId = nullUpdate.Id;
+
+            Assert.True(dto.Id == nullId);
+        }
+
         private RealEstateDto MockRealEstateData2()
         {
             RealEstateDto realEstate = new()
@@ -134,22 +148,34 @@ namespace ShopTARgv23.RealEstateTest
                 CreatedAt = DateTime.Now,
                 ModifiedAt = DateTime.Now,
             };
-
             return realEstate;
         }
         private RealEstateDto MockRealEstateData()
         {
             RealEstateDto realEstate = new()
             {
-                Location = "asd",
-                Size = 100,
-                RoomNumber = 2,
+                Location = "asd2",
+                Size = 50,
+                RoomNumber = 1,
                 BuildingType = "asd",
                 CreatedAt = DateTime.Now,
                 ModifiedAt = DateTime.Now,
             };
-            
             return realEstate;
+        }
+        private RealEstateDto MockNullRealEstateData()
+        {
+            RealEstateDto nullDto = new()
+            {
+                Id = null,
+                Location = "asd",
+                Size = 100,
+                RoomNumber = 2,
+                BuildingType = "asd",
+                CreatedAt = DateTime.Now.AddYears(-1),
+                ModifiedAt = DateTime.Now.AddYears(-1),
+            };
+            return nullDto;
         }
     }
 }
