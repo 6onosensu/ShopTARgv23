@@ -11,31 +11,19 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ShopTARgv23</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Spaceships" asp-action="Index">Spaceship</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="RealEstate" asp-action="Index">Real Estate</a>
-                        </li>
+        <section id="header">
+            <div class="container">
+                <h1 id="logo"><a asp-area="" asp-controller="Home" asp-action="Index">Strongly Typed</a></h1>
+                <nav id="nav">
+                    <ul>
+                        <li><a asp-area="" asp-controller="Home" asp-action="Index" class="icon solid fa-home"><span>Home</span></a></li>
+                        <li><a asp-area="" asp-controller="Home" asp-action="Privacy" class="icon solid fa-cog"><span>Privacy</span></a></li>
+                        <li><a asp-area="" asp-controller="Spaceships" asp-action="Index" class="icon solid fa-retweet"><span>Spaceship</span></a></li>
+                        <li><a asp-area="" asp-controller="RealEstate" asp-action="Index" class="icon solid fa-sitemap"><span>Real Estate</span></a></li>
                     </ul>
-                </div>
+                </nav>
             </div>
-        </nav>
+        </section>
     </header>
     <div class="container">
         <main role="main" class="pb-3">
@@ -43,7 +31,7 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer id="footer">
         <div class="container">
             &copy; 2024 - ShopTARgv23 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
