@@ -4,9 +4,9 @@ using ShopTARgv23.Core.ServiceInterface;
 using ShopTARgv23.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-using ShopTARgv23.RealEstateTest.Macros;
+using ShopTARgv23.KindergartenTest.Macros;
 using Microsoft.Extensions.Hosting;
-using ShopTARgv23.RealEstateTest.Mock;
+using ShopTARgv23.KindergartenTest.Mock;
 
 namespace ShopTARgv23.KindergartenTest
 {
@@ -37,7 +37,7 @@ namespace ShopTARgv23.KindergartenTest
 
         public virtual void SetupServices(IServiceCollection services)
         {
-            services.AddScoped<IRealEstate, RealEstateServices>();
+            services.AddScoped<IKindergarten, KindergartenServices>();
             services.AddScoped<IFileServices, FileServices>();
             services.AddScoped<IHostEnvironment, IMockHostEnvironment>();
 

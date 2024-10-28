@@ -1,4 +1,4 @@
-﻿namespace ShopTARgv23.RealEstateTest.Macros
+﻿namespace ShopTARgv23.KindergartenTest.Macros
 {
     public interface IMacros
     {
