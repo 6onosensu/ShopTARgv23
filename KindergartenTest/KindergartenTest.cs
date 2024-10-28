@@ -39,28 +39,49 @@ namespace ShopTARgv23.KindergartenTest
         }
 
         [Fact]
-        public async Task Should_AddImage_ToKindergarten()
+        public async Task Should_Update_Kindergarten()
         {
-            Guid guid = Guid.Parse("9fdcacaa-8842-478a-ad87-472766b485c8");
-
             var dto = new KindergartenDto
             {
-                Id = guid,
                 GroupName = "Group B",
                 ChildrenCount = 25,
                 KindergartenName = "Happy Kids Updated",
                 Teacher = "Mrs. Sol",
-                Files = new List<FileToDatabase>
-                {
-                    new FileToDatabase { FileName = "image.jpg", Content = new byte[] { 255, 216, 255 } }
-                }
+            };
+            var created = await Svc<IKindergarten>().Create(dto);
+
+            var updateDto = new KindergartenDto
+            {
+                GroupName = "Group B",
+                ChildrenCount = 25,
+                KindergartenName = "Sunny Kids",
+                Teacher = "Mr. Johnson"
             };
 
-            var updatedKindergarten = await Svc<IKindergarten>().Update(dto);
+            var updatedKindergarten = await Svc<IKindergarten>().Update(updateDto);
 
             Assert.NotNull(updatedKindergarten);
-            Assert.Equal(guid, updatedKindergarten.Id);
-            Assert.Equal("image.jpg", updatedKindergarten.Files[0].FileName);
+            Assert.Equal(updateDto.GroupName, updatedKindergarten.GroupName);
+            Assert.Equal(updateDto.ChildrenCount, updatedKindergarten.ChildrenCount);
+            Assert.Equal(updateDto.KindergartenName, updatedKindergarten.KindergartenName);
+            Assert.NotEqual(dto.Teacher, updatedKindergarten.Teacher);
+            Assert.Equal(updateDto.Teacher, updatedKindergarten.Teacher);
+        }
+
+        [Fact]
+        public async Task Should_Delete_Kindergarten()
+        {
+            var dto = new KindergartenDto
+            {
+                GroupName = "Group A",
+                ChildrenCount = 20,
+                KindergartenName = "Happy Kids Kindergarten",
+                Teacher = "Mrs. Smith"
+            };
+            var created = await Svc<IKindergarten>().Create(dto);
+            var deletedKindergarten = await Svc<IKindergarten>().Delete((Guid)created.Id);
+
+            Assert.Equal(deletedKindergarten, created);
         }
     }
 }
