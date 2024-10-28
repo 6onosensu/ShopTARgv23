@@ -4,16 +4,21 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - ShopTARgv23</title>
+
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ShopTARgv23.styles.css" asp-append-version="true" />
+    <!-- Telephasic Template CSS -->
     <link rel="stylesheet" href="~/assets/css/main.css" />
 </head>
-<body>
-    <header>
-        <section id="header">
-            <div class="container">
-                <h1 id="logo"><a asp-area="" asp-controller="Home" asp-action="Index">Strongly Typed</a></h1>
+<body class="homepage is-preload">
+    <div id="page-wrapper">
+
+        <!-- Header Wrapper -->
+        <div id="header-wrapper">
+            <header id="header" class="container">
+                <!-- Navigation -->
                 <nav id="nav">
                     <ul>
                         <li><a asp-area="" asp-controller="Home" asp-action="Index" class="icon solid fa-home"><span>Home</span></a></li>
@@ -22,23 +27,35 @@
                         <li><a asp-area="" asp-controller="RealEstate" asp-action="Index" class="icon solid fa-sitemap"><span>Real Estate</span></a></li>
                     </ul>
                 </nav>
+            </header>
+        </div>
+
+        <div class="wrapper">
+            <div class="container">
+                <main role="main" class="pb-3">
+                    @RenderBody()
+                </main>
             </div>
-        </section>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+        </div>
+        <div id="footer-wrapper">
+            <footer id="footer" class="container">
+                <p>&copy; 2024 - ShopTARgv23 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></p>
+            </footer>
+        </div>
     </div>
 
-    <footer id="footer">
-        <div class="container">
-            &copy; 2024 - ShopTARgv23 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+    <!-- Scripts -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <!-- Telephasic Template Scripts -->
+    <script src="~/assets/js/jquery.min.js"></script>
+    <script src="~/assets/js/jquery.dropotron.min.js"></script>
+    <script src="~/assets/js/browser.min.js"></script>
+    <script src="~/assets/js/breakpoints.min.js"></script>
+    <script src="~/assets/js/util.js"></script>
+    <script src="~/assets/js/main.js"></script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
