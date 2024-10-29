@@ -51,7 +51,7 @@ else { <h1>Create</h1> }
             @foreach (var img in Model.Image)
             {
                 <partial name="Image" model="img" />
-                <input asp-action="removeImage" asp-controller="RealEstate" asp-route-imageId="@img.ImageId" type="submit" class="btn btn-danger" value="Remove Images" />
+                <input asp-action="removeImage" asp-controller="RealEstate" asp-route-imageId="@img.ImageId" type="submit" class="btn" value="Remove Images" />
             }
         </div>
 
@@ -59,13 +59,13 @@ else { <h1>Create</h1> }
 
         @if (Model.Id.HasValue)
         {
-            <input asp-action="update" asp-controller="RealEstate" type="submit" class="btn btn-primary" value="Update" />
+            <input asp-action="update" asp-controller="RealEstate" type="submit" class="btn" value="Update" />
         }
         else
         {
-            <input asp-action="create" asp-controller="RealEstate" type="submit" class="btn btn-primary" value="Create" />
+            <input asp-action="create" asp-controller="RealEstate" type="submit" class="btn" value="Create" />
         }
-        <a asp-action="index" class="btn btn-outline-secondary">Back</a>/>
+        <a asp-action="index" asp-controller="RealEstate">Back</a>/>
 
     </form>
 </div>
