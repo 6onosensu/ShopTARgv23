@@ -79,8 +79,7 @@ namespace ShopTARgv23.Controllers
             var estate = await _realEstate.Details(id);
             if (estate == null) { return NotFound(); }
 
-            var images = await _context.FileToDatabases
-               .Where(x => x.RealEstateId == id)
+            var images = await _context.FileToDatabases.Where(x => x.RealEstateId == id)
                .Select(y => new RealEstateImageViewModel
                {
                    ImageId = y.Id,
@@ -92,6 +91,7 @@ namespace ShopTARgv23.Controllers
 
             var vm = new RealEstateDetailsViewModel();
 
+            vm.Id = id;
             vm.Id = estate.Id;
             vm.Location = estate.Location;
             vm.Size = estate.Size;
@@ -190,6 +190,7 @@ namespace ShopTARgv23.Controllers
             var vm = new RealEstateDeleteViewModel();
 
             vm.Id = id;
+            vm.Id = estate.Id;
             vm.Location = estate.Location;
             vm.Size = estate.Size;
             vm.RoomNumber = estate.RoomNumber;
