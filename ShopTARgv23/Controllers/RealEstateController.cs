@@ -79,7 +79,8 @@ namespace ShopTARgv23.Controllers
             var estate = await _realEstate.Details(id);
             if (estate == null) { return NotFound(); }
 
-            var images = await _context.FileToDatabases.Where(x => x.RealEstateId == id)
+            var images = await _context.FileToDatabases
+               .Where(x => x.RealEstateId == id)
                .Select(y => new RealEstateImageViewModel
                {
                    ImageId = y.Id,
@@ -89,17 +90,18 @@ namespace ShopTARgv23.Controllers
                    Image = string.Format("data:image/gif;base64,{0}", Convert.ToBase64String(y.ImageData)),
                }).ToArrayAsync();
 
-            var vm = new RealEstateDetailsViewModel();
-
-            vm.Id = id;
-            vm.Id = estate.Id;
-            vm.Location = estate.Location;
-            vm.Size = estate.Size;
-            vm.RoomNumber = estate.RoomNumber;
-            vm.BuildingType = estate.BuildingType;
-            vm.CreatedAt = estate.CreatedAt;
-            vm.ModifiedAt = estate.ModifiedAt;
+            var vm = new RealEstateDetailsViewModel
+            {
+                Id = estate.Id,
+                Location = estate.Location,
+                Size = estate.Size,
+                RoomNumber = estate.RoomNumber,
+                BuildingType = estate.BuildingType,
+                CreatedAt = estate.CreatedAt,
+                ModifiedAt = estate.ModifiedAt
+            };
             vm.Image.AddRange(images);
+
 
             return View(vm);
         }
