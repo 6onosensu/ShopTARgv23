@@ -145,6 +145,7 @@ input, textarea, select {
 		color: inherit;
 		text-decoration: none;
 		border-bottom: dotted 1px #62676c;
+		margin-top: 1em;
 	}
 
 		a:hover {
@@ -1911,7 +1912,7 @@ input, textarea, select {
 		display: block;
 		font-weight: 300;
 		color: #52575c;
-		margin: 0 0 0.5em 0;
+		margin: 0 0 0 0;
 	}
 
 form input[type="text"],
@@ -1919,6 +1920,10 @@ form input[type="email"],
 form input[type="password"],
 form input[type="number"],
 form input[type="datetime"],
+form input[type="date"],
+form input[type="time"],
+form input[type="file"],
+form input[type="datetime-local"],
 form select,
 form textarea {
 	-moz-transition: background-color 0.25s ease-in-out;
@@ -1931,9 +1936,9 @@ form textarea {
 	border: solid 1px #d2d7dc;
 	border-radius: 0.35em;
 	width: 100%;
-	line-height: 1.15em;
-	padding: 0.75em;
-	margin-bottom: 0.50em; /*here*/
+	line-height: 1.5em;
+	padding: 0.55em;
+	margin-bottom: 1em;
 }
 
 	form input[type="text"]:focus,
@@ -1941,6 +1946,10 @@ form textarea {
 	form input[type="password"]:focus,
 	form input[type="number"]:focus,
 	form input[type="datetime"]:focus,
+	form input[type="date"]:focus,
+	form input[type="time"]:focus,
+	form input[type="file"]:focus,
+	form input[type="datetime-local"]:focus,
 	form select:focus,
 	form textarea:focus {
 		background: #fff;
@@ -2009,20 +2018,19 @@ input[type="submit"],
 input[type="reset"],
 button,
 .button {
+	margin-top: 1em !important;
 	-moz-transition: color 0.25s ease-in-out, border-color 0.25s ease-in-out, background-color 0.25s ease-in-out;
 	-webkit-transition: color 0.25s ease-in-out, border-color 0.25s ease-in-out, background-color 0.25s ease-in-out;
 	-ms-transition: color 0.25s ease-in-out, border-color 0.25s ease-in-out, background-color 0.25s ease-in-out;
 	transition: color 0.25s ease-in-out, border-color 0.25s ease-in-out, background-color 0.25s ease-in-out;
-	display: inline-block;
 	color: inherit;
 	background: none;
 	text-decoration: none;
 	border: solid 1px #c2c7cc;
 	border-radius: 0.35em;
-	padding: 0.8em 1.8em 0.8em 1.8em;
+	padding: 0.8em 1.4em 0.8em 1.4em;
 	cursor: pointer;
 	outline: 0;
-	margin: 0.6em;
 }
 
 		input[type="button"]:hover,
@@ -2557,7 +2565,7 @@ button,
 		/* Basic */
 
 			body, input, textarea, select {
-				line-height: 1.15em;
+				line-height: 1.5em;
 				font-size: 14pt;
 			}
 

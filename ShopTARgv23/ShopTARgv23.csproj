@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <Folder Include="multipleFileUpload\" />
+    <Folder Include="multipleFileUpload\" />
   </ItemGroup>
 
 </Project>
