@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+﻿using System.Text.Json.Serialization;
+
 /*dataservice.accuweather.com/locations/v1/cities/search?apikey=2LBA498kppCQjyb9ZAh5IgNuMYgZZDEr&q=tallinn*/
 namespace ShopTARgv23.Core.Dto.WeatherDtos
 {
