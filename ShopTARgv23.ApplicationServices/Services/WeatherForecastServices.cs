@@ -1,10 +1,11 @@
 ﻿using Nancy.Json;
 using ShopTARgv23.Core.Dto.WeatherDtos;
+using ShopTARgv23.Core.ServiceInterface;
 using System.Net;
 
 namespace ShopTARgv23.ApplicationServices.Services
 {
-    public class WeatherForecastServices
+    public class WeatherForecastServices : IWeatherForecastServices
     {
         public async Task<AccuLocationWeatherResultDto> AccuWeatherResult(AccuLocationWeatherResultDto dto)
         {
@@ -15,7 +16,12 @@ namespace ShopTARgv23.ApplicationServices.Services
             {
                 string json = client.DownloadString(url);
 
-                AccuLocationRootDto accuResult = new JavaScriptSerializer().Deserialize<AccuLocationRootDto>(json);
+                List<AccuLocationRootDto> accuResult = new JavaScriptSerializer()
+                    .Deserialize<List<AccuLocationRootDto>>(json);
+
+                dto.CityName = accuResult[0].Citys[0].LocalizedName;
+                dto.CityCode = accuResult[0].Citys[0].Key;
+                dto.Rank = accuResult[0].Citys[0].Rank;
             }
             
             return dto;

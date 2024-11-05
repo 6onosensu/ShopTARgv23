@@ -1,9 +1,13 @@
 ﻿using System.Text.Json.Serialization;
 
-/*dataservice.accuweather.com/locations/v1/cities/search?apikey=2LBA498kppCQjyb9ZAh5IgNuMYgZZDEr&q=tallinn*/
 namespace ShopTARgv23.Core.Dto.WeatherDtos
 {
     public class AccuLocationRootDto
+    {
+        public List<City> Citys { get; set; }
+    }
+
+    public class City
     {
         [JsonPropertyName("Version")]
         public int Version { get; set; }
@@ -25,21 +29,30 @@ namespace ShopTARgv23.Core.Dto.WeatherDtos
 
         [JsonPropertyName("PrimaryPostalCode")]
         public string PrimaryPostalCode { get; set; }
-        public AdministrativeArea AdministrativeArea { get; set; }
-        public Country Country { get; set; }
+
+        [JsonPropertyName("Region")]
         public Region Region { get; set; }
+
+        [JsonPropertyName("Country")]
+        public Country Country { get; set; }
+
+        [JsonPropertyName("AdministrativeArea")]
+        public AdministrativeArea AdministrativeArea { get; set; }
+
+        [JsonPropertyName("TimeZone")]
         public TimeZone TimeZone { get; set; }
+
+        [JsonPropertyName("GeoPosition")]
         public GeoPosition GeoPosition { get; set; }
+
+        [JsonPropertyName("IsAlias")]
+        public bool IsAlias { get; set; }
 
         [JsonPropertyName("SupplementalAdminAreas")]
         public List<SupplementalAdminAreas> SupplementalAdminAreas { get; set; }
 
         [JsonPropertyName("DataSets")]
         public List<string> DataSets { get; set; }
-
-        [JsonPropertyName("IsAlias")]
-        public bool IsAlias { get; set; }
-
     }
     public class Region
     {
@@ -106,10 +119,12 @@ namespace ShopTARgv23.Core.Dto.WeatherDtos
     public class GeoPosition
     {
         [JsonPropertyName("Latitude")]
-        public float Latitude { get; set; }
+        public double Latitude { get; set; }
 
         [JsonPropertyName("Longitude")]
-        public float Longitude { get; set; }
+        public double Longitude { get; set; }
+
+        [JsonPropertyName("Elevation")]
         public Elevation Elevation { get; set; }
     }
     public class SupplementalAdminAreas
@@ -125,7 +140,10 @@ namespace ShopTARgv23.Core.Dto.WeatherDtos
     }
     public class Elevation
     {
+        [JsonPropertyName("Metric")]
         public Metric Metric { get; set; }
+
+        [JsonPropertyName("Imperial")]
         public Imperial Imperial { get; set; }
     }
     public class Metric
