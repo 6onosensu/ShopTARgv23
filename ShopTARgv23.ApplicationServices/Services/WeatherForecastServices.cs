@@ -24,7 +24,9 @@ namespace ShopTARgv23.ApplicationServices.Services
                 dto.CityCode = cityInfo.Key;
                 dto.Rank = cityInfo.Rank;
             }
-            
+
+            string urlWeather = $"http://dataservice.accuweather.com/forecasts/v1/daily/1day/{dto.CityCode}?apikey={accuApiKey}&metric=true";
+
             return dto;
         }
     }
