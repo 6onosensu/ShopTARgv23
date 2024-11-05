@@ -19,9 +19,10 @@ namespace ShopTARgv23.ApplicationServices.Services
                 List<AccuLocationRootDto> accuResult = new JavaScriptSerializer()
                     .Deserialize<List<AccuLocationRootDto>>(json);
 
-                dto.CityName = accuResult[0].Citys[0].LocalizedName;
-                dto.CityCode = accuResult[0].Citys[0].Key;
-                dto.Rank = accuResult[0].Citys[0].Rank;
+                var cityInfo = accuResult[0];
+                dto.CityName = cityInfo.LocalizedName;
+                dto.CityCode = cityInfo.Key;
+                dto.Rank = cityInfo.Rank;
             }
             
             return dto;

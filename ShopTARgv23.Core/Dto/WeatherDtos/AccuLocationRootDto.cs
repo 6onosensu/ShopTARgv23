@@ -4,11 +4,6 @@ namespace ShopTARgv23.Core.Dto.WeatherDtos
 {
     public class AccuLocationRootDto
     {
-        public List<City> Citys { get; set; }
-    }
-
-    public class City
-    {
         [JsonPropertyName("Version")]
         public int Version { get; set; }
 
