@@ -2,29 +2,24 @@
 using ShopTARgv23.Core.ServiceInterface;
 using System.Net;
 using Nancy.Json;
+using System.Threading.Tasks;
 
 namespace ShopTARgv23.ApplicationServices.Services
 {
     public class ChuckNorrisServices : IChuckNorrisServices
     {
-        public async Task<ChuckNorrisResultDto> ChuckNorrisResult(ChuckNorrisResultDto dto)
+        public async Task<ChuckNorrisRootDto> GetJokeByCategoryAsync(string category)
         {
-            var url = "https://api.chucknorris.io/jokes/categories";
+            string url = $"https://api.chucknorris.io/jokes/random?category={category}";
 
             using (WebClient client = new WebClient())
             {
-                string json = client.DownloadString(url);
+                string json = await client.DownloadStringTaskAsync(url);
 
-                List<ChuckNorrisRootDto> result = new JavaScriptSerializer()
-                    .Deserialize<List<ChuckNorrisRootDto>>(json);
+                ChuckNorrisRootDto result = new JavaScriptSerializer().Deserialize<ChuckNorrisRootDto>(json);
 
-                dto.IconUrl = result[0].IconUrl;
-                dto.Id = result[0].Id ;
-                dto.Url = result[0].Url ;
-                dto.Value = result[0].Value;
+                return result;
             }
-
-            return dto;
         }
     }
 }
