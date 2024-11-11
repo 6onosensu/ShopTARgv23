@@ -27,6 +27,52 @@ namespace ShopTARgv23.ApplicationServices.Services
 
             string urlWeather = $"http://dataservice.accuweather.com/forecasts/v1/daily/1day/{dto.CityCode}?apikey={accuApiKey}&metric=true";
 
+            using (WebClient client = new WebClient())
+            {
+                string json = client.DownloadString(urlWeather);
+                AccuWeatherRootDto weatherRootDto = new JavaScriptSerializer()
+                    .Deserialize<AccuWeatherRootDto>(json);
+
+                var headline = weatherRootDto.Headline;
+
+                dto.EffectiveDate = headline.EffectiveDate;
+                dto.EffectiveEpochDate = headline.EffectiveEpochDate;
+                dto.Severity = headline.Severity;
+                dto.Text = headline.Text;
+                dto.Category = headline.Category;
+                dto.EndDate = headline.EndDate;
+                dto.EndEpochDate = headline.EndEpochDate;
+                dto.Link = headline.Link;
+                dto.MobileLink = headline.MobileLink;
+
+                var forecast = weatherRootDto.DailyForecasts[0];
+
+                dto.DailyForecastsDate = forecast.Date;
+                dto.DailyForecastsEpochDate = forecast.EpochDate;
+
+                dto.TempMinValue = forecast.Temperature.Minimum.Value;
+                dto.TempMinUnit = forecast.Temperature.Minimum.Unit;
+                dto.TempMinUnitType = forecast.Temperature.Minimum.UnitType;
+                dto.TempMaxValue = forecast.Temperature.Maximum.Value;
+                dto.TempMaxUnit = forecast.Temperature.Maximum.Unit;
+                dto.TempMaxUnitType = forecast.Temperature.Maximum.UnitType;
+
+                dto.DayIcon = forecast.Day.Icon;
+                dto.DayIconPhrase = forecast.Day.IconPhrase;
+                dto.DayHasPrecipitation = forecast.Day.HasPrecipitation;
+                dto.DayPrecipitationType = forecast.Day.PrecipitationType;
+                dto.DayPrecipitationIntensity = forecast.Day.PrecipitationIntensity;
+
+                dto.NightIcon = forecast.Night.Icon;
+                dto.NightIconPhrase = forecast.Night.IconPhrase;
+                dto.NightHasPrecipitation = forecast.Night.HasPrecipitation;
+                dto.DayPrecipitationType = forecast.Night.PrecipitationType;
+                dto.DayPrecipitationIntensity = forecast.Night.PrecipitationIntensity;
+
+                dto.MobileLink = forecast.MobileLink;
+                dto.Link = forecast.Link;
+            }
+
             return dto;
         }
     }
