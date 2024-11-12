@@ -11,28 +11,13 @@
         </div>
 
         <div>
-            <label asp-for="IconUrl" class="col-sm-2"></label>
-            @Html.DisplayFor(model => model.IconUrl)
+            <label asp-for="Categories" class="col-sm-2"></label>
+            @Html.DisplayFor(model => model.Categories)
         </div>
 
         <div>
             <label asp-for="Url" class="col-sm-2"></label>
-            @Html.DisplayFor(model => model.Url)
-        </div>
-
-        <div>
-            <label asp-for="CreatedAt" class="col-sm-2"></label>
-            @Html.DisplayFor(model => model.CreatedAt)
-        </div>
-
-        <div>
-            <label asp-for="UpdatedAt" class="col-sm-2"></label>
-            @Html.DisplayFor(model => model.UpdatedAt)
-        </div>
-
-        <div>
-            <label asp-for="Categories" class="col-sm-2"></label>
-            @Html.DisplayFor(model => model.Categories)
+            <a href="@Html.DisplayFor(model => model.Url)">@Html.DisplayFor(model => model.Url)</a>
         </div>
 
         <div>
