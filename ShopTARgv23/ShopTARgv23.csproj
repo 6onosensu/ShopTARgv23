@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Models\DungeonsAndDragons\" />
     <Folder Include="multipleFileUpload\" />
     <Folder Include="multipleFileUpload\" />
   </ItemGroup>
