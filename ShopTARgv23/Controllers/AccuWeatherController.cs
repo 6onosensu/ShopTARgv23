@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using ShopTARgv23.Core.Dto.WeatherDtos;
 using ShopTARgv23.Core.ServiceInterface;
 using ShopTARgv23.Models.AccuWeather;
-using ShopTARgv23.Models.RealEstate;
 
 namespace ShopTARgv23.Controllers
 {
