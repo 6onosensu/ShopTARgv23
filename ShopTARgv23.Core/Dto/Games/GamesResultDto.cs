@@ -8,6 +8,10 @@ namespace ShopTARgv23.Core.Dto.Games
 {
     public class GamesResultDto
     {
+        public List<GameDto> GameDto { get; set; }
+    }
+    public class GameDto
+    {
         public int id { get; set; }
         public string title { get; set; }
         public string thumbnail { get; set; }
