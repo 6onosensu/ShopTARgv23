@@ -1,7 +1,7 @@
 ﻿@model ShopTARgv23.Models.Games.GameViewModel
 
 <div class="container">
-    <div class="h1">Chuck Norris Joke Details</div>
+    <div class="h1">Game Details</div>
     <hr />
 
     <dl>
@@ -17,7 +17,9 @@
 
         <div>
             <label asp-for="game_url" class="col-sm-2"></label>
-            <a href="@Html.DisplayFor(model => model.game_url)">@Html.DisplayFor(model => model.game_url)</a>
+            <a href="@Html.DisplayFor(model => model.game_url)" target="_blank">
+                @Html.DisplayFor(model => model.game_url)
+            </a>
         </div>
 
         <div>
@@ -57,7 +59,9 @@
 
         <div>
             <label asp-for="freetogame_profile_url" class="col-sm-2"></label>
-            <a href="@Html.DisplayFor(model => model.freetogame_profile_url)">@Html.DisplayFor(model => model.freetogame_profile_url)</a>
+            <a href="@Html.DisplayFor(model => model.freetogame_profile_url)" target="_blank">
+                @Html.DisplayFor(model => model.freetogame_profile_url)
+            </a>
         </div>
     </dl>
 

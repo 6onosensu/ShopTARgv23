@@ -20,7 +20,6 @@ namespace ShopTARgv23
             builder.Services.AddScoped<IRealEstate, RealEstateServices>();
             builder.Services.AddScoped<IWeatherForecastServices, WeatherForecastServices>();
             builder.Services.AddScoped<IChuckNorrisServices, ChuckNorrisServices>();
-            builder.Services.AddScoped<IDungeonsAndDragonsServices, DungeonsAndDragonsServices>();
             builder.Services.AddScoped<IGamesServices, GamesServices>();
 
             builder.Services.AddDbContext<ShopTARgv23Context>(options =>

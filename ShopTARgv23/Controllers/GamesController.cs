@@ -20,6 +20,7 @@ namespace ShopTARgv23.Controllers
 
             var result = dto.GameDto.Select(g => new GamesViewModel
             {
+                id = g.id,
                 title = g.title,
                 genre = g.genre,
             }).ToList();
@@ -32,7 +33,7 @@ namespace ShopTARgv23.Controllers
         {
             GamesResultDto dto = new();
 
-            await _services.GamesResult(dto);
+            _services.GamesResult(dto);
 
             var gameDto = dto.GameDto.FirstOrDefault(g => g.id == id);
 
