@@ -18,11 +18,22 @@ namespace ShopTARgv23.ApplicationServices.Services
                 List<GamesRootDto> gamesRoot = new JavaScriptSerializer()
                     .Deserialize<List<GamesRootDto>>(json);
 
-                
+                if (dto.GameDto == null)
+                {
+                    dto.GameDto = new List<GameDto>();
+                }
+
                 for (var i = 0; i <= gamesRoot.Count(); i++)
                 {
                     var root = gamesRoot[i];
+
+                    if (dto.GameDto.Count <= i)
+                    {
+                        dto.GameDto.Add(new GameDto());
+                    }
+
                     var result = dto.GameDto[i];
+
                     result.id = root.id;
                     result.title = root.title;
                     result.thumbnail = root.thumbnail;
