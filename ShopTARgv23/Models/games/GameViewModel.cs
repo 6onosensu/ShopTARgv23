@@ -1,4 +1,4 @@
-﻿namespace ShopTARgv23.Models.games
+﻿namespace ShopTARgv23.Models.Games
 {
     public class GameViewModel
     {

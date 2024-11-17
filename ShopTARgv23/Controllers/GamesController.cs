@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ShopTARgv23.Core.ServiceInterface;
 using ShopTARgv23.Core.Dto.Games;
-using ShopTARgv23.Models.games;
-using ShopTARgv23.ApplicationServices.Services;
+using ShopTARgv23.Models.Games;
 
 namespace ShopTARgv23.Controllers
 {
@@ -29,7 +28,7 @@ namespace ShopTARgv23.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Game(int id)
+        public async Task<IActionResult> GameDetails(int id)
         {
             GamesResultDto dto = new();
 
