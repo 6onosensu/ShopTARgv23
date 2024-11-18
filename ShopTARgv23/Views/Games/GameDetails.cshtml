@@ -24,7 +24,9 @@
 
         <div>
             <label asp-for="thumbnail" class="col-sm-2"></label>
-            @Html.DisplayFor(model => model.thumbnail)
+            <a href="@Html.DisplayFor(model => model.thumbnail)" target="_blank">
+                @Html.DisplayFor(model => model.thumbnail)
+            </a>
         </div>
 
         <div>
