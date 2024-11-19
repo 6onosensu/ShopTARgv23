@@ -1,4 +1,4 @@
-﻿@model ShopTARgv23.Models.Coctails.DrinkViewModel
+﻿@model ShopTARgv23.Models.Coctails.CoctailSearchViewModel
 
 <div class="container">
     <div class="h1">
@@ -11,13 +11,12 @@
                 Search the coctail here:
             </div>
             <div class="col-sm-10">
-                <label asp-for=""></label>
-                <input asp-for="" class="form-control" />
-                <span asp-validation-for=""></span>
+                <input asp-for="SearchCocktail" class="form-control" />
+                <span asp-validation-for="SearchCocktail"></span>
             </div>
         </div>
         <div>
-            <button asp-controller="Coctails" asp-action="searchCoctail">Search</button>
+            <button asp-controller="Coctails" asp-action="SearchCocktails">Search</button>
         </div>
     </form>
 </div>
