@@ -1,0 +1,33 @@
+﻿@model ShopTARgv23.Models.OpenWeatherMapViewModel
+
+<div class="container">
+    <div class="h1">Check Weather</div>
+    <form asp-action="SearchWeather" method="post">
+        <div>
+            <label for="city">City:</label>
+            <input type="text" id="city" name="City" required />
+        </div>
+        <div>
+            <label for="country">Country:</label>
+            <select id="country" name="Country">
+                <option value="ee">Estonia</option>
+                <option value="US">United States</option>
+                <option value="uk">United Kingdom</option>
+            </select>
+        </div>
+        <button type="submit">Get Weather</button>
+    </form>
+
+    @if (Model != null && !string.IsNullOrEmpty(Model.City))
+
+    {
+        <h2>Weather in @Model.City (@Model.Country)</h2>
+        <p>Temperature: @Model.Temperature °C</p>
+        <p>Feels Like: @Model.FeelsLike °C</p>
+        <p>Weather: @Model.WeatherMain - @Model.WeatherDescription</p>
+        <p>Wind Speed: @Model.WindSpeed m/s</p>
+        <p>Humidity: @Model.Humidity%</p>
+        <p>Pressure: @Model.Pressure hPa</p>
+    }
+
+</div>
