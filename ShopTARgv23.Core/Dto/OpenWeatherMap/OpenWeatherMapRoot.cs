@@ -41,7 +41,7 @@ namespace ShopTARgv23.Core.Dto.OpenWeatherMap
         public string Name { get; set; }
 
         [JsonPropertyName("cod")]
-        public int Cod { get; set; }
+        public string Cod { get; set; }
     }
 
     public class Coord
@@ -74,13 +74,13 @@ namespace ShopTARgv23.Core.Dto.OpenWeatherMap
         public double Temp { get; set; }
 
         [JsonPropertyName("feels_like")]
-        public double FeelsLike { get; set; }
+        public double Feels_Like { get; set; }
 
         [JsonPropertyName("temp_min")]
-        public double TempMin { get; set; }
+        public double Temp_Min { get; set; }
 
         [JsonPropertyName("temp_max")]
-        public double TempMax { get; set; }
+        public double Temp_Max { get; set; }
 
         [JsonPropertyName("pressure")]
         public int Pressure { get; set; }
@@ -89,10 +89,10 @@ namespace ShopTARgv23.Core.Dto.OpenWeatherMap
         public int Humidity { get; set; }
 
         [JsonPropertyName("sea_level")]
-        public int SeaLevel { get; set; }
+        public int Sea_Level { get; set; }
 
         [JsonPropertyName("grnd_level")]
-        public int GrndLevel { get; set; }
+        public int Grnd_Level { get; set; }
     }
 
     public class Wind
