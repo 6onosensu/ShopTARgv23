@@ -32,7 +32,7 @@ namespace ShopTARgv23.Controllers
             };
 
             _services.SendEmail(dto);
-            return RedirectToAction(nameof(Index), model);
+            return RedirectToAction(nameof(Index));
         }
     }
 }
