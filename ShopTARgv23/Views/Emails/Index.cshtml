@@ -1,0 +1,33 @@
+﻿@model ShopTARgv23.Models.Emails.EmailsViewModel
+
+<div class="container">
+    
+    <div class="h1">
+        Send an email!
+    </div>
+
+    <div class="card-body"></div>
+    <form method="post">
+        <div>
+            <div class="col-sm-10">
+                <label asp-for="To"></label>
+                <input asp-for="To" class="form-control" />
+            </div>
+        </div>
+        <div>
+            <div class="col-sm-10">
+                <label asp-for="Subject"></label>
+                <input asp-for="Subject" class="form-control" />
+            </div>
+        </div>
+        <div>
+            <div class="col-sm-10">
+                <label asp-for="Body"></label>
+                <input asp-for="Body" class="form-text" />
+            </div>
+        </div>
+        <div>
+            <button asp-controller="Emails" asp-action="SendMessage">Send</button>
+        </div>
+    </form>
+</div>
