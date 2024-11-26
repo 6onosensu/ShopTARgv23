@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
-using System;
-using System.Diagnostics;
+using System.Net.Mail;
 using MailKit.Net.Smtp;
 using MailKit.Security;
 using MimeKit;
@@ -27,12 +26,32 @@ namespace ShopTARgv23.ApplicationServices.Services
             message.To.Add(MailboxAddress.Parse(dto.To));
             message.Subject = dto.Subject;
 
+            var builder = new BodyBuilder
+            {
+                HtmlBody = dto.Body
+            };
+            /*
             message.Body = new TextPart(MimeKit.Text.TextFormat.Html)
             {
                 Text = dto.Body
-            };
-            
-            using (var client = new SmtpClient())
+            };*/
+
+            foreach (var file in dto.Attachment)
+            {
+                if (file.Length > 0)
+                {
+                    using (var stream = new MemoryStream())
+                    {
+                        file.CopyTo(stream);
+                        stream.Position = 0;
+                        builder.Attachments.Add(file.FileName, stream.ToArray());
+                    }
+                }
+            }
+
+            message.Body = builder.ToMessageBody();
+
+            using (var client = new MailKit.Net.Smtp.SmtpClient())
             {
                 client.Connect(_config.GetSection("EmailHost").Value, 587, SecureSocketOptions.StartTls);
                 client.Authenticate(usersName, _config.GetSection("EmailPassword").Value);
