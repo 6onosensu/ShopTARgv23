@@ -1,6 +1,4 @@
 ﻿using Microsoft.Extensions.Configuration;
-using System.Net.Mail;
-using MailKit.Net.Smtp;
 using MailKit.Security;
 using MimeKit;
 using ShopTARgv23.Core.ServiceInterface;
