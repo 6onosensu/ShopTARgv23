@@ -23,8 +23,7 @@ namespace ShopTARgv23.Controllers
         [HttpPost]
         public IActionResult SendMessage(EmailsViewModel model)
         {
-            var files = Request.Form.Files.Any() ? Request.Form.Files.ToList() : new List<IFormFile>();
-            //var files = Request.Form.Files.Any() ? Request.Form.Files : new FormFileCollection();
+            var files = Request.Form.Files;
             EmailDto dto = new()
             {
                 To = model.To,

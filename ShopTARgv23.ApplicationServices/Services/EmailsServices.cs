@@ -3,6 +3,7 @@ using MailKit.Security;
 using MimeKit;
 using ShopTARgv23.Core.ServiceInterface;
 using ShopTARgv23.Core.Dto;
+using MailKit.Net.Smtp;
 
 
 namespace ShopTARgv23.ApplicationServices.Services
@@ -20,6 +21,7 @@ namespace ShopTARgv23.ApplicationServices.Services
         {
             var message = new MimeMessage();
             var usersName = _config.GetSection("EmailUserName").Value;
+
             message.From.Add(MailboxAddress.Parse(usersName));
             message.To.Add(MailboxAddress.Parse(dto.To));
             message.Subject = dto.Subject;
@@ -49,10 +51,13 @@ namespace ShopTARgv23.ApplicationServices.Services
 
             message.Body = builder.ToMessageBody();
 
-            using (var client = new MailKit.Net.Smtp.SmtpClient())
+            using (var client = new SmtpClient())
             {
-                client.Connect(_config.GetSection("EmailHost").Value, 587, SecureSocketOptions.StartTls);
-                client.Authenticate(usersName, _config.GetSection("EmailPassword").Value);
+                var emailHost = _config.GetSection("EmailHost").Value;
+                var emailPassword = _config.GetSection("EmailPassword").Value;
+
+                client.Connect(emailHost, 587, SecureSocketOptions.StartTls);
+                client.Authenticate(usersName, emailPassword);
                 client.Send(message);
                 client.Disconnect(true);
             }
