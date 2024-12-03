@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopTARgv23.Core", "ShopTAR
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopTARgv23.Data", "ShopTARgv23.Data\ShopTARgv23.Data.csproj", "{33420B25-EA6E-4EBB-B82E-91044B38A8B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopTARgv23.RealEstateTest", "ShopTARgv23.RealEstateTest\ShopTARgv23.RealEstateTest.csproj", "{00C72661-815F-4AE3-8AFF-FA5A6292DC0C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShopTARgv23.RealEstateTest", "ShopTARgv23.RealEstateTest\ShopTARgv23.RealEstateTest.csproj", "{00C72661-815F-4AE3-8AFF-FA5A6292DC0C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
