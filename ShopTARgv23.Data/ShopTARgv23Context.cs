@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using ShopTARgv23.Core.Domain;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace ShopTARgv23.Data
 {

@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Org.BouncyCastle.Bcpg;
 using ShopTARgv23.Core.Domain;
 using ShopTARgv23.Models.Accounts;
 
@@ -53,7 +52,7 @@ namespace ShopTARgv23.Controllers
                     ViewBag.ErrorTitle = "Registration succesful";
                     ViewBag.ErrorMessage = "Before you can Login, please confirm your email, by clicking on the confirmation link we have emailed you";
 
-                    return View("Error");
+                    return View("ErrorEmail");
                 }
 
                 foreach (var error in result.Errors) 
