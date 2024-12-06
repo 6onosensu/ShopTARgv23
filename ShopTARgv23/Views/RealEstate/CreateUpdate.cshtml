@@ -1,10 +1,11 @@
 ﻿@model ShopTARgv23.Models.RealEstate.RealEstateCreateUpdateViewModel
 
-@if (Model.Id.HasValue) { <h1>Update</h1> }
-else { <h1>Create</h1> }
 <div class="h1">
     Real Estate
 </div>
+
+@if (Model.Id.HasValue) { <h1>Update</h1> }
+else { <h3>Create</h3> }
 <div>
     <hr />
     <form method="post" enctype="multipart/form-data">
@@ -45,7 +46,6 @@ else { <h1>Create</h1> }
             <div class="col-sm-10">
                 <div class="custom-file">
                     <input asp-for="Files" class="form-control" multiple type="file"/>
-                    <label class="custom-file-label">Choose file...</label>
                 </div>
             </div>
         </div>
@@ -54,17 +54,17 @@ else { <h1>Create</h1> }
             @foreach (var img in Model.Image)
             {
                 <partial name="Image" model="img" />
-                <input asp-action="removeImage" asp-controller="RealEstate" asp-route-imageId="@img.ImageId" type="submit" class="btn" value="Remove Images" />
+                <input asp-action="removeImage" asp-controller="RealEstate" asp-route-imageId="@img.ImageId" type="submit" class="btn button" value="Remove Images" />
             }
         </div>
 
         @if (Model.Id.HasValue)
         {
-            <input asp-action="update" asp-controller="RealEstate" type="submit" class="btn" value="Update" />
+            <input asp-action="update" asp-controller="RealEstate" type="submit" class="button" value="Update" />
         }
         else
         {
-            <input asp-action="create" asp-controller="RealEstate" type="submit" class="btn" value="Create" />
+            <input asp-action="create" asp-controller="RealEstate" type="submit" class="button" value="Create" />
         }
     </form>
 
