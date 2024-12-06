@@ -1,17 +1,15 @@
-
 html, body {
 	height: 100%;
 	margin: 0;
 	display: flex;
-	flex-direction: column; 
+	flex-direction: column;
 }
 
 #page-wrapper {
 	display: flex;
 	flex-direction: column;
-	flex-grow: 1; 
+	flex-grow: 1;
 }
-
 
 main {
 	flex-grow: 1;
@@ -42,10 +40,12 @@ footer {
 	color: white;
 	text-align: center;
 }
+
 	footer a {
 		color: white;
 		text-decoration: none;
 	}
+
 		footer a:hover {
 			color: black;
 			text-decoration: underline;
@@ -68,9 +68,13 @@ footer {
 	padding: 20px 0 30px;
 }
 
+	.navbar .ms-auto {
+		display: flex;
+	}
 .nav-link:hover {
 	color: black;
 }
+
 .nav-link {
 	color: white;
 }
@@ -96,7 +100,6 @@ header {
 	overflow-x: auto;
 	gap: 10px;
 	scrollbar-width: none;
-	max-width: 1120px;
 }
 
 	.secondary-buttons::-webkit-scrollbar {
@@ -140,6 +143,43 @@ header {
 		color: #0A62D0;
 		box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
 	}
+
+@media (max-width: 1200px) {
+
+	.secondary-buttons-wrapper {
+		max-width: 90%;
+	}
+}
+
+@media (max-width: 1000px) {
+
+	.secondary-buttons-wrapper {
+		max-width: 90%;
+	}
+	.navbar .ms-auto {
+		justify-content: center;
+	}
+}
+
+@media (max-width: 800px) {
+
+	.secondary-buttons-wrapper {
+		max-width: 90%;
+	}
+	.navbar .ms-auto {
+		justify-content: center;
+	}
+}
+
+@media (max-width: 500px) {
+
+	.secondary-buttons-wrapper {
+		max-width: 90%;
+	}
+	.navbar .ms-auto {
+		justify-content: center;
+	}
+}
 
 input[type="text"],
 input[type="number"],
@@ -275,5 +315,3 @@ button, .button {
 	.table tr:hover {
 		background-color: #f8f9fa;
 	}
-
-
