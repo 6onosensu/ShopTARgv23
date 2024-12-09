@@ -27,25 +27,40 @@
                             <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></li>
                         </ul>
                         <ul class="navbar-nav ms-auto">
-                            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Accounts" asp-action="Register">Sign Up</a></li>
-                            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Accounts" asp-action="Login">Sign In</a></li>
+                            @if (!User.Identity.IsAuthenticated) {
+                                <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Accounts" asp-action="Register">Sign Up</a></li>
+                                <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Accounts" asp-action="Login">Sign In</a></li>
+                            }
+                            else
+                            {
+                                <li class="nav-item">
+                                    <form method="post" asp-controller="Accounts" asp-action="logout">
+                                        <button type="submit">
+                                            Logout @User?.Identity?.Name
+                                        </button>
+                                    </form>
+                                </li>
+                            }
                         </ul>
                     </div>
                 </div>
             </nav>
-            <div class="secondary-buttons-wrapper">
-                <button class="nav-scroll nav-scroll-left">&larr;</button>
-                <div class="secondary-buttons">
-                    <a class="btn" asp-area="" asp-controller="RealEstate" asp-action="Index">Real Estate</a>
-                    <a class="btn" asp-area="" asp-controller="Spaceships" asp-action="Index">Spaceship</a>
-                    <a class="btn" asp-area="" asp-controller="Games" asp-action="Index">Games</a>
-                    <a class="btn" asp-area="" asp-controller="AccuWeather" asp-action="Index">Weather</a>
-                    <a class="btn" asp-area="" asp-controller="ChuckNorris" asp-action="Index">Jokes</a>
-                    <a class="btn" asp-area="" asp-controller="Coctails" asp-action="Index">Cocktails</a>
-                    <a class="btn" asp-area="" asp-controller="Emails" asp-action="Index">Send an Email</a>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div class="secondary-buttons-wrapper">
+                    <button class="nav-scroll nav-scroll-left">&larr;</button>
+                    <div class="secondary-buttons">
+                        <a class="btn" asp-area="" asp-controller="RealEstate" asp-action="Index">Real Estate</a>
+                        <a class="btn" asp-area="" asp-controller="Spaceships" asp-action="Index">Spaceship</a>
+                        <a class="btn" asp-area="" asp-controller="Games" asp-action="Index">Games</a>
+                        <a class="btn" asp-area="" asp-controller="AccuWeather" asp-action="Index">Weather</a>
+                        <a class="btn" asp-area="" asp-controller="ChuckNorris" asp-action="Index">Jokes</a>
+                        <a class="btn" asp-area="" asp-controller="Coctails" asp-action="Index">Cocktails</a>
+                        <a class="btn" asp-area="" asp-controller="Emails" asp-action="Index">Send an Email</a>
+                    </div>
+                    <button class="nav-scroll nav-scroll-right">&rarr;</button>
                 </div>
-                <button class="nav-scroll nav-scroll-right">&rarr;</button>
-            </div>
+            }
         </header>
 
         <!-- Main Content -->
@@ -66,22 +81,25 @@
                         <a asp-area="" asp-controller="Home" asp-action="Index" class="text-decoration-none me-3">Home</a>
                         <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-decoration-none me-3">Privacy</a>
                     </div>
-                    <div class="dropdown">
-                        <button class="btn dropdown-toggle text-decoration-none me-3" type="button" id="worksDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                            All Works
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="worksDropdown">
-                            <li><a class="dropdown-item" asp-area="" asp-controller="RealEstate" asp-action="Index">Real Estate</a></li>
-                            <li><a class="dropdown-item" asp-area="" asp-controller="Spaceships" asp-action="Index">Spaceships</a></li>
-                            <li><a class="dropdown-item" asp-area="" asp-controller="Games" asp-action="Index">Games</a></li>
-                            <li><a class="dropdown-item" asp-area="" asp-controller="AccuWeather" asp-action="Index">AccuWeather</a></li>
-                            <li><a class="dropdown-item" asp-area="" asp-controller="ChuckNorris" asp-action="Index">Chuck Norris Jokes</a></li>
-                            <li><a class="dropdown-item" asp-area="" asp-controller="Coctails" asp-action="Index">Cocktails</a></li>
-                            <li><a class="dropdown-item" asp-area="" asp-controller="AccuWeather" asp-action="Index">AccuWeather</a></li>
-                            <li><a class="dropdown-item" asp-area="" asp-controller="ChuckNorris" asp-action="Index">Chuck Norris Jokes</a></li>
-                            <li><a class="dropdown-item" asp-area="" asp-controller="Coctails" asp-action="Index">Cocktails</a></li>
-                        </ul>
-                    </div>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <div class="dropdown">
+                            <button class="btn dropdown-toggle text-decoration-none me-3" type="button" id="worksDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                All Works
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="worksDropdown">
+                                <li><a class="dropdown-item" asp-area="" asp-controller="RealEstate" asp-action="Index">Real Estate</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Spaceships" asp-action="Index">Spaceships</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Games" asp-action="Index">Games</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="AccuWeather" asp-action="Index">AccuWeather</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="ChuckNorris" asp-action="Index">Chuck Norris Jokes</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Coctails" asp-action="Index">Cocktails</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="AccuWeather" asp-action="Index">AccuWeather</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="ChuckNorris" asp-action="Index">Chuck Norris Jokes</a></li>
+                                <li><a class="dropdown-item" asp-area="" asp-controller="Coctails" asp-action="Index">Cocktails</a></li>
+                            </ul>
+                        </div>
+                    }
                 </div>
             </footer>
         </div>
