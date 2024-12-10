@@ -32,10 +32,10 @@ namespace ShopTARgv23
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = true;
-                options.Password.RequiredLength = 3;
+                options.Password.RequiredLength = 4;
 
                 options.Tokens.EmailConfirmationTokenProvider = "CustomEmailConfirmation";
-                options.Lockout.MaxFailedAccessAttempts = 3;
+                options.Lockout.MaxFailedAccessAttempts = 2;
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
             }).AddEntityFrameworkStores<ShopTARgv23Context>()
             .AddDefaultTokenProviders()

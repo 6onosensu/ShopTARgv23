@@ -61,6 +61,8 @@ footer {
 		border: 1px solid #ccc;
 	}
 
+
+
 .navbar {
 	position: relative;
 	background-color: #0A62D0;
@@ -71,6 +73,7 @@ footer {
 	.navbar .ms-auto {
 		display: flex;
 	}
+
 .nav-link:hover {
 	color: black;
 }
@@ -187,7 +190,7 @@ input[type="email"],
 input[type="password"],
 input[type="file"],
 textarea,
-select {
+.wrapper select {
 	width: 100%;
 	padding: 10px 15px;
 	font-size: 16px;
@@ -204,7 +207,7 @@ select {
 	input[type="email"]:focus,
 	input[type="password"]:focus,
 	textarea:focus,
-	select:focus {
+	.wrapper select:focus {
 		outline: none;
 		border: 2px solid #0A62D0;
 		background-color: #f8f9fa;
@@ -227,7 +230,7 @@ input[type="file"] {
 		transition: all 0.4s ease;
 	}
 
-		input[type="file"]::file-selector-button:hover {
+		.wrapperinput[type="file"]::file-selector-button:hover {
 			background-color: white !important;
 			color: #0A62D0 !important;
 			border: 2px solid #0A62D0 !important;
@@ -251,7 +254,7 @@ label {
 	margin-top: 10px;
 }
 
-button, .button {
+.wrapper button, .wrapper .button {
 	background-color: #0A62D0;
 	color: white;
 	border: none;
@@ -264,11 +267,11 @@ button, .button {
 	margin: 10px 0;
 }
 
-	button:hover, .button:hover {
-		background-color: white;
-		border: 1px solid #0A62D0;
-		color: #0A62D0;
-	}
+.wrapper button:hover, .wrapper .button:hover {
+	background-color: white;
+	border: 1px solid #0A62D0;
+	color: #0A62D0;
+}
 
 .form-control {
 	border-radius: 6px !important;
@@ -314,4 +317,47 @@ button, .button {
 
 	.table tr:hover {
 		background-color: #f8f9fa;
+	}
+
+
+.custom-button {
+	background-color: #0A62D0;
+	color: white; 
+	font-weight: bold;
+	padding: 10px 15px;
+	border: 1px solid #0A62D0;
+	border-radius: 6px !important;
+	cursor: pointer;
+	transition: all 0.3s ease-in-out; 
+	text-align: center; 
+	text-decoration: none; 
+}
+
+	.custom-button:hover {
+		border: 1px solid white; 
+		background-color: #0A62D0; 
+		color: white;
+	}
+
+	.custom-button:focus {
+		border: 1px solid white;
+		outline: none; 
+	}
+
+.dropdownHF {
+	font-weight: bold !important;
+}
+
+.logout, .dropdownHF {
+	margin: 6px;
+	padding: 10px 16px;
+	color: white;
+	border-radius: 6px;
+	background-color: #0A62D0 !important;
+	border: 1px solid #0A62D0;
+}
+
+	.logout:hover, .dropdownHF:hover {
+		border: 1px solid white;
+		background-color: #0A62D0 !important;
 	}
