@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ShopTARgv23.Data;
 
@@ -11,9 +12,11 @@ using ShopTARgv23.Data;
 namespace ShopTARgv23.Data.Migrations
 {
     [DbContext(typeof(ShopTARgv23Context))]
-    partial class ShopTARgv23ContextModelSnapshot : ModelSnapshot
+    [Migration("20241209143211_UserFirstName")]
+    partial class UserFirstName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -242,7 +245,7 @@ namespace ShopTARgv23.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("FileToApis", (string)null);
+                    b.ToTable("FileToApis");
                 });
 
             modelBuilder.Entity("ShopTARgv23.Core.Domain.FileToDatabase", b =>
@@ -262,7 +265,7 @@ namespace ShopTARgv23.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("FileToDatabases", (string)null);
+                    b.ToTable("FileToDatabases");
                 });
 
             modelBuilder.Entity("ShopTARgv23.Core.Domain.RealEstate", b =>
@@ -291,7 +294,7 @@ namespace ShopTARgv23.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("RealEstates", (string)null);
+                    b.ToTable("RealEstates");
                 });
 
             modelBuilder.Entity("ShopTARgv23.Core.Domain.Spaceship", b =>
@@ -326,7 +329,7 @@ namespace ShopTARgv23.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Spaceships", (string)null);
+                    b.ToTable("Spaceships");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
