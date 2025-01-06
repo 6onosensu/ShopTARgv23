@@ -319,29 +319,31 @@ label {
 		background-color: #f8f9fa;
 	}
 
-
+#sendButton,
 .custom-button {
 	background-color: #0A62D0;
-	color: white; 
+	color: white;
 	font-weight: bold;
 	padding: 10px 15px;
 	border: 1px solid #0A62D0;
 	border-radius: 6px !important;
 	cursor: pointer;
-	transition: all 0.3s ease-in-out; 
-	text-align: center; 
-	text-decoration: none; 
+	transition: all 0.3s ease-in-out;
+	text-align: center;
+	text-decoration: none;
 }
 
+	#sendButton:hover,
 	.custom-button:hover {
-		border: 1px solid white; 
-		background-color: #0A62D0; 
+		border: 1px solid white;
+		background-color: #0A62D0;
 		color: white;
 	}
 
+	#sendButton:focus,
 	.custom-button:focus {
 		border: 1px solid white;
-		outline: none; 
+		outline: none;
 	}
 
 .dropdownHF {
