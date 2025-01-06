@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using ShopTARgv23.ApplicationServices.Services;
 using ShopTARgv23.Core.Domain;
 using ShopTARgv23.Core.Dto;
 using ShopTARgv23.Core.ServiceInterface;
@@ -16,15 +15,19 @@ namespace ShopTARgv23.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailsServices _emailsServices;
-        public AccountsController(
-            UserManager<ApplicationUser> userManager, 
-            SignInManager<ApplicationUser> signInManager,
-            IEmailsServices emailsServices)
+
+        public AccountsController
+            (
+                UserManager<ApplicationUser> userManager,
+                SignInManager<ApplicationUser> signInManager,
+                IEmailsServices emailsServices
+            )
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailsServices = emailsServices;
         }
+
 
         [HttpGet]
         public IActionResult Register()
@@ -35,73 +38,19 @@ namespace ShopTARgv23.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public async Task<IActionResult> Register(RegisterViewModel vm) 
+        public async Task<IActionResult> Register(RegisterViewModel vm)
         {
-            if (ModelState.IsValid) 
+            if (ModelState.IsValid)
             {
                 var user = new ApplicationUser
                 {
                     UserName = vm.Email,
                     Email = vm.Email,
                     City = vm.City,
+                    FirstName = vm.FirstName,
                 };
 
                 var result = await _userManager.CreateAsync(user, vm.Password);
-
-                if (result.Succeeded)
-                {
-                    var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    var confirmationLink = Url.Action("ConfirmEmail", "Accounts", new { userId = user.Id, token = token }, Request.Scheme);
-
-                    if (_signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
-                    {
-                        return RedirectToAction("ListUsers", "Administrations");
-                    }
-
-                    ViewBag.ErrorTitle = "Registration succesful";
-                    ViewBag.ErrorMessage = "Before you can Login, please confirm your email, by clicking on the confirmation link we have emailed you";
-
-                    return View("ErrorEmail");
-                }
-
-                foreach (var error in result.Errors) 
-                {
-                    ModelState.AddModelError("", error.Description);
-                }
-            }
-                
-            return View();
-        }
-
-        [HttpGet]
-        [AllowAnonymous]
-        public async Task<IActionResult> Login(string? returnUrl)
-        {
-            LoginViewModel vm = new()
-            {
-                ReturnUrl = returnUrl,
-                ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList(),
-            };
-            return View(vm);
-        }
-
-        [HttpPost]
-        [AllowAnonymous]
-        public async Task<IActionResult> Login(LoginViewModel model, string? returnUrl)
-        {
-            model.ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-
-            if (ModelState.IsValid)
-            {
-                var user = await _userManager.FindByEmailAsync(model.Email);
-                if (user != null && !user.EmailConfirmed &&
-                    (await _userManager.CheckPasswordAsync(user, model.Password)))
-                {
-                    ModelState.AddModelError(string.Empty, "Email not confirmed yet!");
-                    return View(model);
-                }
-
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, true);
 
                 if (result.Succeeded)
                 {
@@ -226,10 +175,6 @@ namespace ShopTARgv23.Controllers
                     }
                     else
                     {
-                        //ApplicationUser applicationUser = new();
-
-                        //model.FirstName = applicationUser.FirstName;
-
                         return RedirectToAction("Index", "Home");
                     }
                 }
@@ -351,13 +296,6 @@ namespace ShopTARgv23.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult ResetPassword(string email, string token)
         {
-            //var user = await _userManager.GetUserAsync(User);
-            //token = await _userManager.GeneratePasswordResetTokenAsync(user);
-
-            //if (token == null || user.Email == null)
-            //{
-            //    ModelState.AddModelError("", "Invalid password reset token");
-            //}
             if (string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(token))
             {
                 return RedirectToAction("Index", "Home");

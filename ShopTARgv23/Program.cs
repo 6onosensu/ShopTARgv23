@@ -26,6 +26,7 @@ namespace ShopTARgv23
             builder.Services.AddScoped<IGamesServices, GamesServices>();
             builder.Services.AddScoped<ICoctailServices, CoctailServices>();
             builder.Services.AddScoped<IEmailsServices, EmailsServices>();
+            builder.Services.AddSignalR();
 
             builder.Services.AddDbContext<ShopTARgv23Context>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));

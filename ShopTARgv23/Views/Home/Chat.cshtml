@@ -1,4 +1,5 @@
 ﻿@page
+
 <div class="container">
     <div class="row p-1">
         <div class="col-1">User</div>
@@ -6,7 +7,7 @@
     </div>
     <div class="row p-1">
         <div class="col-1">Message</div>
-        <div class="col-5 w-100"><input type="text" id="messageInput" /></div>
+        <div class="col-5"><input type="text" class="w-100" id="messageInput" /></div>
     </div>
     <div class="row p-1">
         <div class="col-6 text-end">
@@ -15,10 +16,14 @@
     </div>
     <div class="row p-1">
         <div class="col-6">
-            <ul id="messageList"></ul>
+            <hr />
+        </div>
+    </div>
+    <div class="row p-1">
+        <div class="col-6">
+            <ul id="messagesList"></ul>
         </div>
     </div>
 </div>
-
 <script src="~/js/signalr/dist/browser/signalr.js"></script>
 <script src="~/js/chat.js"></script>
