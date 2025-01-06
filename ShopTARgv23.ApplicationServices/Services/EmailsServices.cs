@@ -12,29 +12,25 @@ namespace ShopTARgv23.ApplicationServices.Services
     {
         private readonly IConfiguration _config;
 
-        public EmailsServices(IConfiguration config) 
-        { 
+        public EmailsServices(IConfiguration config)
+        {
             _config = config;
         }
 
         public void SendEmail(EmailDto dto)
         {
-            var message = new MimeMessage();
-            var usersName = _config.GetSection("EmailUserName").Value;
-
-            message.From.Add(MailboxAddress.Parse(usersName));
-            message.To.Add(MailboxAddress.Parse(dto.To));
-            message.Subject = dto.Subject;
-
+            var email = new MimeMessage();
+            email.From.Add(MailboxAddress.Parse(_config.GetSection("EmailUserName").Value));
+            email.To.Add(MailboxAddress.Parse(dto.To));
+            email.Subject = dto.Subject;
+            //email.Body = new TextPart(MimeKit.Text.TextFormat.Html)
+            //{
+            //    Text = dto.Body
+            //};
             var builder = new BodyBuilder
             {
                 HtmlBody = dto.Body
             };
-            /*
-            message.Body = new TextPart(MimeKit.Text.TextFormat.Html)
-            {
-                Text = dto.Body
-            };*/
 
             foreach (var file in dto.Attachment)
             {
@@ -48,19 +44,39 @@ namespace ShopTARgv23.ApplicationServices.Services
                     }
                 }
             }
+            email.Body = builder.ToMessageBody();
 
-            message.Body = builder.ToMessageBody();
+            using var smtp = new SmtpClient();
 
-            using (var client = new SmtpClient())
+            smtp.Connect(_config.GetSection("EmailHost").Value, 587, MailKit.Security.SecureSocketOptions.StartTls);
+            smtp.Authenticate(_config.GetSection("EmailUserName").Value, _config.GetSection("EmailPassword").Value);
+            smtp.Send(email);
+            smtp.Disconnect(true);
+        }
+        public void SendEmailToken(EmailTokenDto dto, string token)
+        {
+            dto.Token = token;
+            var email = new MimeMessage();
+
+            _config.GetSection("EmailUserName").Value = "inde999@gmail.com";
+            _config.GetSection("EmailHost").Value = "smtp.gmail.com";
+            _config.GetSection("EmailPassword").Value = "semn tnmv wosb cdwd";
+
+            email.From.Add(MailboxAddress.Parse(_config.GetSection("EmailUserName").Value));
+            email.To.Add(MailboxAddress.Parse(dto.To));
+            email.Subject = dto.Subject;
+            var builder = new BodyBuilder
             {
-                var emailHost = _config.GetSection("EmailHost").Value;
-                var emailPassword = _config.GetSection("EmailPassword").Value;
+                HtmlBody = dto.Body,
+            };
 
-                client.Connect(emailHost, 587, SecureSocketOptions.StartTls);
-                client.Authenticate(usersName, emailPassword);
-                client.Send(message);
-                client.Disconnect(true);
-            }
+            email.Body = builder.ToMessageBody();
+            using var smtp = new SmtpClient();
+
+            smtp.Connect(_config.GetSection("EmailHost").Value, 587, MailKit.Security.SecureSocketOptions.StartTls);
+            smtp.Authenticate(_config.GetSection("EmailUserName").Value, _config.GetSection("EmailPassword").Value);
+            smtp.Send(email);
+            smtp.Disconnect(true);
         }
     }
 }

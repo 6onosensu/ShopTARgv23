@@ -5,6 +5,7 @@ using ShopTARgv23.ApplicationServices.Services;
 using Microsoft.Extensions.FileProviders;
 using ShopTARgv23.Core.Domain;
 using Microsoft.AspNetCore.Identity;
+using ShopTARgv23.Hubs;
 
 namespace ShopTARgv23
 {
@@ -69,6 +70,7 @@ namespace ShopTARgv23
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+            app.MapHub<ChatHub>("/chatHub");
 
             app.Run();
         }
