@@ -43,9 +43,12 @@
                             {
                                 <li class="nav-item">
                                     <form method="post" asp-controller="Accounts" asp-action="logout">
-                                        <button type="submit" class="logout">
-                                            Log Out @user.FirstName
-                                        </button>
+                                        @if (user != null)
+                                        {
+                                            <button type="submit" class="logout">
+                                                Log Out @user.FirstName
+                                            </button>
+                                        }
                                     </form>
                                 </li>
                                 <div class="dropdown">
